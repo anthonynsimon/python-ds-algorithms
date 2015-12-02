@@ -3,7 +3,7 @@
 class SNode:
     def __init__(self, data, nextNode):
         self.data = data
-        self.nextNode = nextNode
+        self.next = nextNode
 
 
 class LLStack:
@@ -26,7 +26,7 @@ class LLStack:
     def pop(self):
         if self.isEmpty() is not True:
             holder = self.top.data
-            self.top = self.top.nextNode
+            self.top = self.top.next
             self.count -= 1
             return holder
 
@@ -35,13 +35,25 @@ class LLStack:
         if self.isEmpty():
             self.top = newNode
         else:
-            newNode.nextNode = self.top
+            newNode.next = self.top
             self.top = newNode
         self.count += 1
 
     def clear(self):
         self.count = 0
         self.top = None
+
+    def __str__(self):
+        contents = []
+        if self.count > 0:
+            current = self.top
+            while current != None:
+                contents.append(current.data)
+                current = current.next
+            contents.reverse()
+            return str(contents)
+        else:
+            return "[]"
 
 # "Array/List" Stack
 
@@ -68,6 +80,9 @@ class ALStack:
     def clear(self):
         self.list = []
 
+    def __str__(self):
+        return str(self.list)
+
 # "Array/List" Stack with inverted indices
 
 class ALIStack:
@@ -92,5 +107,10 @@ class ALIStack:
 
     def clear(self):
         self.list = []
+
+    def __str__(self):
+        contents = self.list
+        contents.reverse()
+        return str(contents)
 
 
