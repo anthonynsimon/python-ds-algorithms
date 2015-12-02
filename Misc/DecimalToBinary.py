@@ -1,4 +1,5 @@
-import Stacks
+from DataStructures import Stacks
+
 
 def baseConverter(decimal, base):
     digits = "0123456789ABCDEF"

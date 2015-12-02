@@ -1,5 +1,7 @@
 import unittest
-import Stacks
+
+from DataStructures import Stacks
+
 
 class TestStacks(unittest.TestCase):
 

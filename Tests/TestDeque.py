@@ -1,5 +1,7 @@
 import unittest
-import Deque
+
+from DataStructures import Deque
+
 
 class TestDeque(unittest.TestCase):
     def testALDeque(self):

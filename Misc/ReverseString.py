@@ -1,4 +1,5 @@
-import Deque
+from DataStructures import Deque
+
 
 def reverseString(string):
     deque = Deque.Deque()

@@ -1,4 +1,5 @@
-import Stacks
+from DataStructures import Stacks
+
 
 class ParenthesesChecker:
     def __init__(self):

@@ -1,5 +1,7 @@
-import Queue
 import random
+
+from DataStructures import Queue
+
 
 class PrintTask():
     def __init__(self, pages):

@@ -1,4 +1,4 @@
-import OrderedList
+from DataStructures import OrderedList
 
 oList = OrderedList.OrderedList()
 oList.add(7)

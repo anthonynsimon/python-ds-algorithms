@@ -1,4 +1,5 @@
-import Queue
+from DataStructures import Queue
+
 
 def simulateHotPotato(namesList, number):
     simQueue = Queue.LLQueue()

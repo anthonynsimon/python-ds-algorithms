@@ -1,4 +1,5 @@
-import Stacks
+from DataStructures import Stacks
+
 
 class HanoiDisk:
     def __init__(self, size):

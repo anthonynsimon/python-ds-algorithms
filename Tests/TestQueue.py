@@ -1,5 +1,7 @@
 import unittest
-import Queue
+
+from DataStructures import Queue
+
 
 class TestQueue(unittest.TestCase):
 
