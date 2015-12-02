@@ -83,6 +83,7 @@ class ALStack:
     def __str__(self):
         return str(self.list)
 
+
 # "Array/List" Stack with inverted indices
 
 class ALIStack:

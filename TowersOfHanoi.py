@@ -12,7 +12,7 @@ class HanoiDisk:
 
 class Tower:
     def __init__(self):
-        self.stack = Stacks.LLStack()
+        self.stack = Stacks.ALStack()
 
     def addToTop(self, disk):
         if self.stack.isEmpty() != True:
@@ -83,9 +83,10 @@ class HanoiSolver:
 towers = TowersSet(16)
 hanoiSolver = HanoiSolver(towers)
 hanoiSolver.solve()
-print("Tower A =", towers.towerA)
-print("Tower B =", towers.towerB)
-print("Tower C =", towers.towerC)
-print("Solved?", "Yes" if towers.isSolved() == True else "Not yet")
-print("Required a minimum of {0} moves. Solved in {1} moves." .format(pow(2, towers.size) -1, towers.numberOfMoves))
+print("Tower A = {0}" .format(towers.towerA))
+print("Tower B = {0}" .format(towers.towerB))
+print("Tower C = {0}" .format(towers.towerC))
+print("{0}" .format("Problem solved!" if towers.isSolved() == True else "Problem not solved yet"))
+if towers.isSolved():
+    print("Required a minimum of {0} moves. Solved in {1} moves." .format(pow(2, towers.size) -1, towers.numberOfMoves))
 

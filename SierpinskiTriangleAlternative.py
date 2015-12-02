@@ -42,4 +42,4 @@ def sierpinskiAlternative(turtle, degree, points):
         temp = [p1,points[2],p2]
         sierpinskiAlternative(turtle, degree, temp)
 
-main(800,8)
+main(400,6)
