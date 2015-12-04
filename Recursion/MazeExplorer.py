@@ -10,31 +10,28 @@ OBSTACLE = 'O'
 PLAYER = 'P'
 EXIT = 'E'
 
-class Vector2D(object):
+class Vector2D:
     def __init__(self, x, y):
         self.x = x
         self.y = y
 
     def __repr__(self):
-        return "[{0}, {1}]".format(self.x, self.y)
+        return "[{0},{1}]".format(self.x, self.y)
 
-class Maze(object):
+class Maze:
     def __init__(self,mazeFileName):
         self.grid = []
         self.playerPosition = Vector2D(0,0)
         self.parseMaze(mazeFileName)
 
     def __repr__(self):
-        items = []
-
+        outString = ""
         for row in self.grid:
-            items.append("{0}".format(row))
-
-        return "\n".join(items)
+            outString += "{0}\n".format(row)
+        return outString
 
     def parseMaze(self, mazeFile):
         mazePosition = Vector2D(0,0)
-
         for line in open(mazeFile):
             self.grid.append([])
             isOpen = False
@@ -49,7 +46,6 @@ class Maze(object):
                         self.playerPosition = Vector2D(mazePosition.x, mazePosition.y)
                     self.grid[mazePosition.y].append(element)
                     mazePosition.x += 1
-
             mazePosition.x = 0
             mazePosition.y += 1
 
@@ -66,41 +62,33 @@ class Maze(object):
             return False
         elif newCell == EXIT:
             return True
-
         self.setGridCell(self.playerPosition.x,self.playerPosition.y, PART_OF_PATH)
         self.setGridCell(newVector.x, newVector.y, PLAYER)
         self.playerPosition = Vector2D(newVector.x, newVector.y)
-
         return True
 
 class MazeSolver:
     def __init__(self, maze):
         self.maze = maze
         self.pathsGrid = deepcopy(self.maze.grid)
-
         if self.solve(self.maze.playerPosition):
             print("Maze solved!")
         else:
             print("Couldn't solve maze...")
-
         print(self)
 
     def __repr__(self):
-        items = []
-
+        outString = ""
         for row in self.pathsGrid:
-            items.append("{0}".format(row))
-
-        return "\n".join(items)
+            outString += "{0}\n".format(row)
+        return outString
 
     def solve(self, vector):
         cell = self.pathsGrid[vector.y][vector.x]
-
         if cell == EXIT:
             return True
-        elif cell == TRIED or cell == OBSTACLE:
+        if cell == TRIED or cell == OBSTACLE:
             return False
-
         self.pathsGrid[vector.y][vector.x] = TRIED
 
         if self.solve(Vector2D(vector.x, vector.y-1)):
@@ -113,5 +101,4 @@ class MazeSolver:
             return True
 
 maze = Maze("MazeMap.txt")
-print(maze)
 solver = MazeSolver(maze)

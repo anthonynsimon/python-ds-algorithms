@@ -3,7 +3,6 @@ class LLNode:
         self.data = data
         self.next = None
 
-
 class ALQueue:
     def __init__(self):
         self.front = None
@@ -15,7 +14,7 @@ class ALQueue:
 
     def dequeue(self):
         if not self.isEmpty():
-            return self.list.pop()
+            return self.list.pop() #more explicit: self.list.pop(len(self.list)-1)
 
     def isEmpty(self):
         return False if len(self.list) > 0 else True
@@ -31,7 +30,6 @@ class ALQueue:
         self.front = None
         self.back = None
         self.list = []
-
 
 class LLQueue:
 
@@ -51,7 +49,7 @@ class LLQueue:
         self.count += 1
 
     def dequeue(self):
-        if not self.isEmpty():
+        if self.isEmpty() != True:
             tempData  = self.head.data
             self.head = self.head.next
             self.count -= 1

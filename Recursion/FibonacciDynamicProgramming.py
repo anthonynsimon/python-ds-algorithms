@@ -1,14 +1,14 @@
-class Fibonacci(object):
+def naiveFibonacci(n):
+    if n == 0 or n == 1:
+        return 1
+
+    return naiveFibonacci(n-1) + naiveFibonacci(n-2)
+
+class Fibonacci:
     def __init__(self):
         self.cache = {}
         self.cache[0] = 1
         self.cache[1] = 1
-
-    def naiveFibonacci(self, n):
-        if n == 0 or n == 1:
-            return 1
-
-        return self.naiveFibonacci(n-1) + self.naiveFibonacci(n-2)
 
     def bottomUpFibonacci(self, n):
 
@@ -18,7 +18,9 @@ class Fibonacci(object):
         return self.cache[n]
 
 
+# for i in range(20):
+#     print(naiveFibonacci(i))
 fib = Fibonacci()
 for i in range(200):
-     #print(fib.naiveFibonacci(i))
+     #print(naiveFibonacci(i))
      print(fib.bottomUpFibonacci(i))

@@ -1,4 +1,4 @@
-class Deque(object):
+class Deque:
     def __init__(self):
         self.items = []
 
@@ -9,19 +9,19 @@ class Deque(object):
         self.items.append(data)
 
     def removeHead(self):
-        if not self.isEmpty():
+        if self.isEmpty() == False:
             return self.items.pop(0)
 
     def removeTail(self):
-        if not self.isEmpty():
+        if self.isEmpty() == False:
             return self.items.pop()
 
     def peekHead(self):
-        if not self.isEmpty():
+        if self.isEmpty() == False:
             return self.items[0]
 
     def peekTail(self):
-        if not self.isEmpty():
+        if self.isEmpty() == False:
             return self.items[self.size()-1]
 
     def size(self):
