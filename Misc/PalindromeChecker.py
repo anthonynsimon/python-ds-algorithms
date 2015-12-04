@@ -1,13 +1,12 @@
 from DataStructures import Deque
 
-
 def isPalindrome(string):
     deque = Deque.Deque()
     inputStr = str(string)
     result = True
 
-    for ch in inputStr:
-        deque.addHead(ch)
+    for character in inputStr:
+        deque.addHead(character)
 
     # iterate over deque until either it proves false or
     # until there's only one character left (pivot point)

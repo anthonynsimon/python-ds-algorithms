@@ -1,7 +1,6 @@
 from DataStructures import Stacks
 
-
-class HanoiDisk:
+class HanoiDisk(object):
     def __init__(self, size):
         self.size = size
 
@@ -11,7 +10,7 @@ class HanoiDisk:
     def __repr__(self):
         return str(self.size)
 
-class Tower:
+class Tower(object):
     def __init__(self):
         self.stack = Stacks.ALStack()
 
@@ -34,15 +33,17 @@ class Tower:
     def __str__(self):
         return str(self.stack)
 
-class TowersSet:
+class TowersSet(object):
     def __init__(self, size):
         self.numberOfMoves = 0
         self.towerA = Tower()
         self.towerB = Tower()
         self.towerC = Tower()
         self.size = size
+
         for i in range(size):
             self.towerA.addToTop(HanoiDisk(size - i))
+
         self.solution = []
         for i in range(size):
             self.solution.append(size-i)
@@ -68,7 +69,7 @@ class TowersSet:
         else:
             return False
 
-class HanoiSolver:
+class HanoiSolver(object):
     def __init__(self, towers):
         self.towers = towers
 
@@ -80,6 +81,7 @@ class HanoiSolver:
             self.solveWorker(height-1, source, spare, destination)
             self.towers.moveDisk(source, destination)
             self.solveWorker(height-1, spare, destination, source)
+
 
 towers = TowersSet(16)
 hanoiSolver = HanoiSolver(towers)

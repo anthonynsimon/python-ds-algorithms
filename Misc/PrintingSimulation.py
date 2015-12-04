@@ -1,32 +1,39 @@
 import random
-
 from DataStructures import Queue
 
-
-class PrintTask():
+class PrintTask(object):
     def __init__(self, pages):
         self.pages = pages
 
     def getPages(self):
         return int(self.pages)
 
-class Printer:
+class Printer(object):
     def __init__(self, ppm):
         self.pagesPerMinute = ppm
         self.timeRemaining = 0
         self.currentTask = None
         self.taskQueue = Queue.ALQueue()
         self.waitingTimes = []
-        self.numberOfPages = []
+        self.jobHistory = {}
+        self.jobID = 1000
+
+    def startNextTask(self):
+        self.currentTask = self.taskQueue.dequeue()
+        if self.currentTask != None:
+            #Task is starting
+            print("Job #{0}: Starting new print task...".format(self.jobID))
+            self.jobHistory[self.jobID] = self.currentTask.getPages()
+            self.timeRemaining = self.currentTask.getPages() * 60/self.pagesPerMinute
+            self.waitingTimes.append(self.timeRemaining)
 
     def tick(self):
         if self.currentTask != None:
-            #print(self.timeRemaining)
             self.timeRemaining -= 1
-            #if self.timeRemaining <= 0:
+            if self.timeRemaining <= 0:
                 #Task is done
-                #print("Task done. Printed %i pages."%(self.currentTask.getPages()))
-
+                print("Job #{0}: Task done. Printed {1} pages".format(self.jobID, self.jobHistory[self.jobID]))
+                self.jobID += 1
         if self.timeRemaining <= 0:
             self.startNextTask()
 
@@ -36,31 +43,19 @@ class Printer:
     def isBusy(self):
         return self.currentTask != None
 
-    def startNextTask(self):
-        self.currentTask = self.taskQueue.dequeue()
-        if self.currentTask != None:
-            #Task is starting
-            #print("Starting new print task...")
-            self.timeRemaining = self.currentTask.getPages() * 60/self.pagesPerMinute
-            self.waitingTimes.append(self.timeRemaining)
-            self.numberOfPages.append(self.currentTask.getPages())
-
     def averageWaitingTime(self):
         return sum(self.waitingTimes)/len(self.waitingTimes)
 
-    def resetTimesHistory(self):
-        self.waitingTimes = []
-
     def averagePages(self):
-        return sum(self.numberOfPages)/len(self.numberOfPages)
+        return sum(self.jobHistory.values())/len(self.jobHistory)
 
-    def resetAveragePages(self):
-        self.numberOfPages = []
+    def resetHistory(self):
+        self.waitingTimes = []
 
     def resetPrintQueue(self):
         self.taskQueue.clear()
 
-class Simulation:
+class Simulation(object):
     def __init__(self, printer, numberOfStudents):
         self.printer = printer
         self.numberOfStudents = numberOfStudents
@@ -79,8 +74,10 @@ class Simulation:
 simulation = Simulation(Printer(5),10)
 for i in range (10):
     simulation.run(1)
-    print("The printer took an average of {0:0.1f} seconds to complete each task, average number of pages was {1} and {2} tasks remained"
-          .format(simulation.printer.averageWaitingTime(), int(simulation.printer.averagePages()), simulation.printer.taskQueue.size()))
-    simulation.printer.resetTimesHistory()
+    print("The printer took an average of {0:0.1f} seconds to complete each task, "
+          "average number of pages was {1} and {2} tasks remained"
+          .format(simulation.printer.averageWaitingTime(), int(simulation.printer.averagePages()),
+                  simulation.printer.taskQueue.size()))
+
+    simulation.printer.resetHistory()
     simulation.printer.resetPrintQueue()
-    simulation.printer.resetAveragePages()
