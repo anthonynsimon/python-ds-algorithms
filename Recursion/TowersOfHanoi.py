@@ -81,7 +81,7 @@ class HanoiSolver:
             self.towers.moveDisk(source, destination)
             self.solveWorker(height-1, spare, destination, source)
 
-towers = TowersSet(20)
+towers = TowersSet(16)
 hanoiSolver = HanoiSolver(towers)
 hanoiSolver.solve()
 print("Tower A = {0}" .format(towers.towerA))
