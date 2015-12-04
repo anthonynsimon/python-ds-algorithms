@@ -1,34 +1,33 @@
 from DataStructures import Deque
 
-
 def reverseString(string):
     deque = Deque.Deque()
     inputStr = str(string)
-    outputStr = ""
+    items = []
 
     for ch in inputStr:
         deque.addHead(ch)
 
     for i in range(deque.size()):
-        outputStr += deque.removeHead()
+        items.append(deque.removeHead())
 
-    return outputStr
+    return "".join(items)
 
 def reverseStringAlternative(string):
     inputStr = str(string)
-    outputStr = ""
     length = len(inputStr)
+    items = []
 
     for i in range(length):
-        outputStr += inputStr[length - 1 - i]
+        items.append(inputStr[length - 1 - i])
 
-    return outputStr
+    return "".join(items)
 
 text = "Let's grab some lunch"
 print(text)
-text = reverseStringAlternative(text)
+text = reverseString(text)
 print(text)
 text = reverseStringAlternative(text)
 print(text)
 print(reverseStringAlternative(123456789))
-print(reverseStringAlternative("Let's go to XYZ"))
+print(reverseString("Let's go to XYZ"))

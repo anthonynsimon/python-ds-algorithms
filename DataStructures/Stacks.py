@@ -1,12 +1,12 @@
 # Linked List Stack
 
-class SNode:
+class SNode(object):
     def __init__(self, data, nextNode):
         self.data = data
         self.next = nextNode
 
 
-class LLStack:
+class LLStack(object):
     def __init__(self):
         self.top = None
         self.count = 0
@@ -18,13 +18,10 @@ class LLStack:
         return True if 0 >= self.size() else False
 
     def peek(self):
-        if self.isEmpty() is True:
-            return None
-        else:
-            return self.top.data
+        return None if self.isEmpty() else self.top.data
 
     def pop(self):
-        if self.isEmpty() is not True:
+        if not self.isEmpty():
             holder = self.top.data
             self.top = self.top.next
             self.count -= 1
@@ -32,11 +29,13 @@ class LLStack:
 
     def push(self, data):
         newNode = SNode(data, None)
+
         if self.isEmpty():
             self.top = newNode
         else:
             newNode.next = self.top
             self.top = newNode
+
         self.count += 1
 
     def clear(self):
@@ -45,19 +44,20 @@ class LLStack:
 
     def __str__(self):
         contents = []
+
         if self.count > 0:
             current = self.top
-            while current != None:
+
+            while current is not None:
                 contents.append(current.data)
                 current = current.next
+
             contents.reverse()
-            return str(contents)
-        else:
-            return "[]"
 
-# "Array/List" Stack
+        return str(contents)
 
-class ALStack:
+
+class ALStack(object):
     def __init__(self):
         self.list = []
 
@@ -71,11 +71,11 @@ class ALStack:
         self.list.append(data)
 
     def pop(self):
-        if self.isEmpty() is not True:
+        if not self.isEmpty():
             return self.list.pop()
 
     def peek(self):
-        return None if self.isEmpty() is True else self.list[self.size()-1]
+        return None if self.isEmpty() else self.list[self.size()-1]
 
     def clear(self):
         self.list = []
@@ -84,9 +84,7 @@ class ALStack:
         return str(self.list)
 
 
-# "Array/List" Stack with inverted indices
-
-class ALIStack:
+class ALIStack(object):
     def __init__(self):
         self.list = []
 
@@ -97,13 +95,13 @@ class ALIStack:
         return len(self.list)
 
     def peek(self):
-        return None if self.isEmpty() is True else self.list[0]
+        return None if self.isEmpty() else self.list[0]
 
     def push(self, data):
         self.list.insert(0,data)
 
     def pop(self):
-        if self.isEmpty() is not True:
+        if not self.isEmpty():
             return self.list.pop(0)
 
     def clear(self):

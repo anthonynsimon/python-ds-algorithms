@@ -1,41 +1,43 @@
 def FizzBuzz(maxN):
     n = 1
+    items = []
+
     while (n <= maxN):
         if (n % 3 == 0 and n % 5 == 0):
-            print("FizzBuzz ")
+            items.append("FizzBuzz")
         elif (n % 3 == 0):
-            print("Fizz ")
+            items.append("Fizz")
         elif (n % 5 == 0):
-            print("Buzz")
+            items.append("Buzz")
         else:
-            print(n)
+            items.append(str(n))
         n+=1
 
-def FizzBuzzFaster():
+    print(" ".join(items))
 
-    outString = ""
+def FizzBuzzFaster():
+    items = []
     fizz = 3
     buzz = 5
 
     for i in range(1,101):
-
         fizz -= 1
         buzz -= 1
 
         if fizz is 0 and buzz is 0:
-            outString += "FizzBuzz "
+            items.append("FizzBuzz")
             fizz = 3
             buzz = 5
         elif fizz is 0:
-            outString += "Fizz "
+            items.append("Fizz")
             fizz = 3
         elif buzz is 0:
-            outString += "Buzz "
+            items.append("Buzz")
             buzz = 5
+        else:
+            items.append(str(i))
 
-        outString += str(i) + " "
+    print (" ".join(items))
 
-    print(outString)
-
-# FizzBuzz(100)
+FizzBuzz(100)
 FizzBuzzFaster()

@@ -1,7 +1,5 @@
 import unittest
-
 from Misc import BalancedParenthesesChecker
-
 
 class TestBalancedParentheses(unittest.TestCase):
 
