@@ -1,13 +1,14 @@
-class OLNode:
+class OLNode(object):
     def __init__(self, initData):
         self.data = initData
         self.next = None
 
-class OrderedList:
+class OrderedList(object):
     def __init__(self):
         self.head = None
         self.count = 0
 
+    # TODO: re-use methods for searching when possible
     def add(self, item):
         self.count += 1
         if self.head == None:
@@ -18,17 +19,17 @@ class OrderedList:
             done = False
             newNode = OLNode(item)
 
-            while done == False:
-                if current != None:
+            while not done:
+                if current is None:
+                    done = True
+                else:
                     if current.data > item:
                         done = True
                     else:
                         previous = current
                         current = current.next
-                else:
-                    done = True
 
-            if previous == None:
+            if previous is None:
                 newNode.next = self.head
                 self.head = newNode
             else:
@@ -52,7 +53,6 @@ class OrderedList:
                     else:
                         previous.next = current.next
                     done = True
-
                 else:
                     previous = current
                     current = current.next
@@ -62,13 +62,12 @@ class OrderedList:
         found = False
         current = self.head
 
-        while current != None:
+        while current is not None:
             if item == current.data:
                 found = True
                 break
             else:
                 current = current.next
-
         return found
 
     def isEmpty(self):
@@ -90,19 +89,22 @@ class OrderedList:
             self.count -= 1
             return temp
         else:
-            while current.next.next != None:
+            while current.next.next is not None:
                 current = current.next
-
             temp = current.next.data
             current.next = None
             self.count -= 1
             return temp
 
+    def clear(self):
+        self.head = None
+        self.count = 0
+
     def __str__(self):
         nodes = []
         current = self.head
 
-        while current != None:
+        while current is not None:
             nodes.append(current.data)
             current = current.next
         return str(nodes)

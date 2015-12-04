@@ -1,7 +1,5 @@
 import unittest
-
 from DataStructures import Stacks
-
 
 class TestStacks(unittest.TestCase):
 
@@ -32,6 +30,8 @@ class TestStacks(unittest.TestCase):
         self.assertEqual(stack.peek(), 67.128)
         self.assertEqual(stack.size(), 4)
 
+        self.assertEqual(str(stack), "['Marcus', 5, False, 67.128]")
+
         stack.pop()
         stack.pop()
         stack.pop()
@@ -42,6 +42,7 @@ class TestStacks(unittest.TestCase):
         self.assertIsNone(stack.peek())
         self.assertEqual(stack.size(),0)
         self.assertTrue(stack.isEmpty())
+
 
     def testALStack(self):
         stack = Stacks.ALStack()
@@ -69,6 +70,8 @@ class TestStacks(unittest.TestCase):
         self.assertFalse(stack.isEmpty())
         self.assertEqual(stack.peek(), 67.128)
         self.assertEqual(stack.size(), 4)
+
+        self.assertEqual(str(stack), "['Marcus', 5, False, 67.128]")
 
         stack.pop()
         stack.pop()
@@ -107,6 +110,8 @@ class TestStacks(unittest.TestCase):
         self.assertFalse(stack.isEmpty())
         self.assertEqual(stack.peek(), 67.128)
         self.assertEqual(stack.size(), 4)
+
+        self.assertEqual(str(stack), "['Marcus', 5, False, 67.128]")
 
         stack.pop()
         stack.pop()
