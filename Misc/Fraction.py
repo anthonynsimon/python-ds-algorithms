@@ -1,4 +1,4 @@
-def greatestCommonDenominator(m, n):
+def gcd(m,n):
     while m%n != 0:
         oldm = m
         oldn = n
@@ -10,23 +10,26 @@ def greatestCommonDenominator(m, n):
 class fraction:
 
     def __init__(self, top, bottom):
-        self.number = top
-        self.denominator = bottom
+        self.num = top
+        self.den = bottom
+
+    def show(self):
+        print("%i/%i" %(self.num, self.den))
 
     def __str__(self):
-        return "{0}/{1}".format(self.number, self.denominator)
+        return ("%i/%i" %(self.num, self.den))
 
-    def asDecimal(self):
-        return self.number / self.denominator
+    def showAsDecimal(self):
+        print("%f" %(self.num / self.den))
 
     def __add__(self, other):
-        number = self.number * other.denominator + self.denominator * other.number
-        denominator = self.denominator * other.denominator
-        common = greatestCommonDenominator(number, denominator)
+        newNum = self.num*other.den + self.den * other.num
+        newDen = self.den * other.den
+        common = gcd(newNum,newDen)
 
-        return fraction(number//common, denominator//common)
+        return fraction(newNum//common, newDen//common)
 
 myFraction = fraction(1,2)
+myFraction.showAsDecimal()
 newFrac = myFraction + fraction(1,2)
-print("{0} as decimal is {1}".format(myFraction, myFraction.asDecimal()))
-print("{0} as decimal is {1}".format(newFrac, newFrac.asDecimal()))
+newFrac.showAsDecimal()

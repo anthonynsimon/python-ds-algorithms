@@ -1,49 +1,22 @@
 from DataStructures import OrderedList
-import unittest
 
-class TestOrderedList(unittest.TestCase):
-    def test(self):
-        oList = OrderedList.OrderedList()
+oList = OrderedList.OrderedList()
+oList.add(7)
+oList.add(0)
+oList.add(5)
 
-        self.assertTrue(oList.isEmpty())
+print(oList)
+print("Size is {0}".format(oList.size()))
 
-        oList.add(7)
-        oList.add(0)
-        oList.add(3)
-
-        self.assertFalse(oList.isEmpty())
-        self.assertEqual(oList.size(), 3)
-        self.assertEqual(str(oList), "[0, 3, 7]")
-
-        oList.add(6)
-        oList.remove(3)
-        oList.add(2)
-
-        self.assertEqual(str(oList), "[0, 2, 6, 7]")
-        self.assertEqual(oList.size(), 4)
-        self.assertEqual(oList.pop(), 7)
-        self.assertEqual(oList.pop(), 6)
-        self.assertEqual(str(oList), "[0, 2]")
-        self.assertFalse(oList.isEmpty())
-
-        oList.clear()
-
-        self.assertTrue(oList.isEmpty())
-        self.assertEqual(oList.size(), 0)
-        self.assertEqual(str(oList), "[]")
-
-        self.assertEqual(oList.pop(), None)
-
-        oList.add(6)
-
-        self.assertEqual(str(oList), "[6]")
-        self.assertEqual(oList.remove(3), None)
-        self.assertTrue(oList.search(6))
-        self.assertFalse(oList.search(77))
-
-        oList.add(2)
-
-        self.assertEqual(str(oList), "[2, 6]")
-
-suite = unittest.TestLoader().loadTestsFromTestCase(TestOrderedList)
-unittest.TextTestRunner(verbosity=2).run(suite)
+oList.remove(5)
+oList.add(2)
+oList.add(6)
+oList.add(77)
+oList.pop()
+oList.pop()
+oList.remove(0)
+oList.pop()
+print(oList)
+print("Size is {0}".format(oList.size()))
+print("Contains 2 ?", oList.search(2))
+print("Contains 77 ?", oList.search(77))
