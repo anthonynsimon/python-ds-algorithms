@@ -14,13 +14,20 @@ class HashMapNode(object):
 
 class HashMapAlternate(object):
     def __init__(self):
-        self.sizeOfTable = 16
+        self.sizeOfTable = 64
         self.slots = [None] * self.sizeOfTable
         self.distributionTable = [0] * self.sizeOfTable
         for i in range(self.sizeOfTable):
             self.slots[i] = HashMapNode()
 
     def hash(self, key):
+        if type(key) is str:
+            sum = 0
+            position = 1
+            for ch in key:
+                sum += ord(ch) * position
+                position += 1
+            key = sum
         return key % self.sizeOfTable
 
     def put(self, key, value):
@@ -105,14 +112,3 @@ class HashMapAlternate(object):
 
             hashmapRepresentation.append(" -> ".join(items))
         return "\n".join(hashmapRepresentation)
-
-
-hashMap = HashMapAlternate()
-for i in range(128):
-        hashMap.put(i, "ZZZ")
-for i in range(128):
-        hashMap.put(i, "YYY")
-for i in range(128):
-        hashMap.remove(i)
-print(hashMap.distributionTable)
-print(hashMap)

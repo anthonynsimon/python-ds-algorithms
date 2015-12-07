@@ -1,16 +1,21 @@
 # TODO:
-# + Add string key or generic style keys
 # + Make Linked List based collision resolution
 # + Write unit Tests
 # + Add "remove" method
 
 class HashMapSimple(object):
     def __init__(self):
-        self.sizeOfTable = 16
+        self.sizeOfTable = 64
         self.slots = [None] * self.sizeOfTable
         self.data = [None] * self.sizeOfTable
 
     def hash(self, key):
+        if type(key) is str:
+            sum = 0
+            position = 1
+            for ch in key:
+                sum += ord(ch) * position
+            key = sum
         return key % self.sizeOfTable
 
     def rehash(self, oldHash):
@@ -48,12 +53,3 @@ class HashMapSimple(object):
             return self.data[hashValue]
         else:
             return False
-
-
-hashMap = HashMapSimple()
-for i in range(16):
-    hashMap.put(i,"Something")
-for i in range(16,32):
-    hashMap.put(i,"Break")
-print(hashMap.slots)
-print(hashMap.data)
