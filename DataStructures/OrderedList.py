@@ -1,4 +1,4 @@
-class OLNode(object):
+class OrderedListNode(object):
     def __init__(self, initData):
         self.data = initData
         self.next = None
@@ -12,12 +12,12 @@ class OrderedList(object):
     def add(self, item):
         self.count += 1
         if self.head == None:
-            self.head = OLNode(item)
+            self.head = OrderedListNode(item)
         else:
             current = self.head
             previous = None
             done = False
-            newNode = OLNode(item)
+            newNode = OrderedListNode(item)
 
             while not done:
                 if current is None:

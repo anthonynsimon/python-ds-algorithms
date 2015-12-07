@@ -1,10 +1,11 @@
-class LLNode:
+class QueueLLNode:
     def __init__(self, data):
         self.data = data
         self.next = None
 
 
-class ALQueue:
+# Array based Queue
+class QueueAA:
     def __init__(self):
         self.front = None
         self.back = None
@@ -33,7 +34,8 @@ class ALQueue:
         self.list = []
 
 
-class LLQueue:
+# Linked list based Queue
+class QueueLL:
 
     def __init__(self):
         self.head = None
@@ -41,7 +43,7 @@ class LLQueue:
         self.count = 0
 
     def enqueue(self, data):
-        temp = LLNode(data)
+        temp = QueueLLNode(data)
         if self.isEmpty():
             self.head = temp
             self.tail = temp

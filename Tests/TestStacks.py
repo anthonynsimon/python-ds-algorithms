@@ -4,7 +4,7 @@ from DataStructures import Stacks
 class TestStacks(unittest.TestCase):
 
     def testLLStack(self):
-        stack = Stacks.LLStack()
+        stack = Stacks.StackLL()
 
         self.assertIsNone(stack.peek())
         self.assertEqual(stack.size(),0)
@@ -15,7 +15,7 @@ class TestStacks(unittest.TestCase):
         stack.push(False)
         stack.push(67.128)
         stack.push("Carlos")
-        stack.push(Stacks.SNode)
+        stack.push(Stacks.StackLLNode)
         stack.push(8)
 
         self.assertFalse(stack.isEmpty())
@@ -45,7 +45,7 @@ class TestStacks(unittest.TestCase):
 
 
     def testALStack(self):
-        stack = Stacks.ALStack()
+        stack = Stacks.StackAA()
 
         self.assertIsNone(stack.peek())
         self.assertEqual(stack.size(),0)
@@ -56,7 +56,7 @@ class TestStacks(unittest.TestCase):
         stack.push(False)
         stack.push(67.128)
         stack.push("Carlos")
-        stack.push(Stacks.SNode)
+        stack.push(Stacks.StackLLNode)
         stack.push(8)
 
         self.assertFalse(stack.isEmpty())
@@ -85,7 +85,7 @@ class TestStacks(unittest.TestCase):
         self.assertTrue(stack.isEmpty())
 
     def testALIStack(self):
-        stack = Stacks.ALIStack()
+        stack = Stacks.StackAI()
 
         self.assertIsNone(stack.peek())
         self.assertEqual(stack.size(),0)
@@ -96,7 +96,7 @@ class TestStacks(unittest.TestCase):
         stack.push(False)
         stack.push(67.128)
         stack.push("Carlos")
-        stack.push(Stacks.SNode)
+        stack.push(Stacks.StackLLNode)
         stack.push(8)
 
         self.assertFalse(stack.isEmpty())

@@ -6,7 +6,7 @@ from DataStructures import Queue
 class TestQueue(unittest.TestCase):
 
     def testALQueueTest(self):
-        queue = Queue.ALQueue()
+        queue = Queue.QueueAA()
         self.assertEqual(queue.size(),0)
         self.assertTrue(queue.isEmpty())
         self.assertEqual(queue.dequeue(), None)
@@ -27,7 +27,7 @@ class TestQueue(unittest.TestCase):
         self.assertEqual(queue.isEmpty(), True)
 
     def testLLQueueTest(self):
-        queue = Queue.LLQueue()
+        queue = Queue.QueueLL()
         self.assertEqual(queue.size(),0)
         self.assertTrue(queue.isEmpty())
         self.assertEqual(queue.dequeue(), None)

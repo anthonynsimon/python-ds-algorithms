@@ -13,7 +13,7 @@ class Printer(object):
         self.pagesPerMinute = ppm
         self.timeRemaining = 0
         self.currentTask = None
-        self.taskQueue = Queue.ALQueue()
+        self.taskQueue = Queue.QueueAA()
         self.waitingTimes = []
         self.jobHistory = {}
         self.jobID = 1000

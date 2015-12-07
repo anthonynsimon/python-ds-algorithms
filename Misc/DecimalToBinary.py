@@ -2,7 +2,7 @@ from DataStructures import Stacks
 
 def baseConverter(decimal, base):
     digits = "0123456789ABCDEF"
-    stack = Stacks.ALStack()
+    stack = Stacks.StackAA()
     number = decimal
 
     while number > 0:

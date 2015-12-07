@@ -1,7 +1,7 @@
 from DataStructures import Queue
 
 def simulateHotPotato(namesList, numberOfPasses):
-    simQueue = Queue.LLQueue()
+    simQueue = Queue.QueueLL()
 
     for name in namesList:
         simQueue.enqueue(name)

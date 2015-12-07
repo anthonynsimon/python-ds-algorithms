@@ -12,7 +12,7 @@ class HanoiDisk(object):
 
 class Tower(object):
     def __init__(self):
-        self.stack = Stacks.ALStack()
+        self.stack = Stacks.StackAA()
 
     def addToTop(self, disk):
         if self.stack.isEmpty() != True:

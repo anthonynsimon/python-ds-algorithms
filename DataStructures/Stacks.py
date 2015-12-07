@@ -1,12 +1,11 @@
-# Linked List Stack
-
-class SNode(object):
+class StackLLNode(object):
     def __init__(self, data, nextNode):
         self.data = data
         self.next = nextNode
 
 
-class LLStack(object):
+# Linked list based Stack
+class StackLL(object):
     def __init__(self):
         self.top = None
         self.count = 0
@@ -28,7 +27,7 @@ class LLStack(object):
             return holder
 
     def push(self, data):
-        newNode = SNode(data, None)
+        newNode = StackLLNode(data, None)
 
         if self.isEmpty():
             self.top = newNode
@@ -57,7 +56,8 @@ class LLStack(object):
         return str(contents)
 
 
-class ALStack(object):
+# Array based Stack
+class StackAA(object):
     def __init__(self):
         self.list = []
 
@@ -84,7 +84,7 @@ class ALStack(object):
         return str(self.list)
 
 
-class ALIStack(object):
+class StackAI(object):
     def __init__(self):
         self.list = []
 

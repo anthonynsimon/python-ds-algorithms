@@ -2,7 +2,7 @@ from DataStructures import Stacks
 
 class ParenthesesChecker:
     def __init__(self):
-        self.stack = Stacks.ALIStack()
+        self.stack = Stacks.StackAI()
 
     def check(self, dataToCheck):
         balanced = True
