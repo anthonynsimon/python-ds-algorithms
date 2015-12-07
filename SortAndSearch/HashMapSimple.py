@@ -1,6 +1,8 @@
 # TODO:
 # + Add string key or generic style keys
 # + Make Linked List based collision resolution
+# + Write unit Tests
+# + Add "remove" method
 
 class HashMapSimple(object):
     def __init__(self):
@@ -46,6 +48,7 @@ class HashMapSimple(object):
             return self.data[hashValue]
         else:
             return False
+
 
 hashMap = HashMapSimple()
 for i in range(16):
