@@ -1,10 +1,10 @@
 import unittest
-from SortSearchAndHash import BubbleSort
-from SortSearchAndHash import SelectionSort
-from SortSearchAndHash import InsertionSort
-from SortSearchAndHash import ShellSort
-from SortSearchAndHash import MergeSort
-from SortSearchAndHash import QuickSort
+from SortAndSearch import BubbleSort
+from SortAndSearch import SelectionSort
+from SortAndSearch import InsertionSort
+# from SortAndSearch import ShellSort
+# from SortAndSearch import MergeSort
+# from SortAndSearch import QuickSort
 
 class TestSortingAlgorithms(unittest.TestCase):
     def getUnsortedList(self):
