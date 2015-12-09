@@ -2,8 +2,8 @@ import unittest
 from SortAndSearch import BubbleSort
 from SortAndSearch import SelectionSort
 from SortAndSearch import InsertionSort
-# from SortAndSearch import ShellSort
-# from SortAndSearch import MergeSort
+from SortAndSearch import ShellSort
+from SortAndSearch import MergeSort
 # from SortAndSearch import QuickSort
 
 class TestSortingAlgorithms(unittest.TestCase):
@@ -30,12 +30,12 @@ class TestSortingAlgorithms(unittest.TestCase):
     def testInsertionSort(self):
         self.runTest(InsertionSort.InsertionSort())
 
-    # def testShellSort(self):
-    #     self.runTest(ShellSort.ShellSort())
-    #
-    # def testMergeSort(self):
-    #     self.runTest(MergeSort.MergeSort())
-    #
+    def testShellSort(self):
+        self.runTest(ShellSort.ShellSort())
+
+    def testMergeSort(self):
+        self.runTest(MergeSort.MergeSort())
+
     # def testQuickSort(self):
     #     self.runTest(QuickSort.QuickSort())
 
