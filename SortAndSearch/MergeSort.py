@@ -1,9 +1,15 @@
+# TODO:
+# Write an iterative solution
+
 class MergeSort(object):
     def __init__(self):
         pass
 
-    def sort(self, list):
-        list[:] = self.sortWorker(list)
+    def sort(self, listToSort):
+        if type(listToSort) is not list or len(listToSort) < 1:
+            return
+
+        listToSort[:] = self.sortWorker(listToSort)
 
     def sortWorker(self, list,):
         if len(list) == 1:

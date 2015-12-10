@@ -4,7 +4,7 @@ from SortAndSearch import SelectionSort
 from SortAndSearch import InsertionSort
 from SortAndSearch import ShellSort
 from SortAndSearch import MergeSort
-# from SortAndSearch import QuickSort
+from SortAndSearch import QuickSort
 
 class TestSortingAlgorithms(unittest.TestCase):
     def getUnsortedList(self):
@@ -12,14 +12,20 @@ class TestSortingAlgorithms(unittest.TestCase):
 
     def getCorrectResult(self):
         correctResult = []
-        for i in range(21):
+        for i in range(len(self.getUnsortedList())):
             correctResult.append(i)
         return correctResult
 
     def runTest(self, sortingAlgorithm):
         numbers = self.getUnsortedList()
+        repeatedNumbers = [2,2,0,77,2]
+        wrongInput = 57
         sortingAlgorithm.sort(numbers)
+        sortingAlgorithm.sort(repeatedNumbers)
+        sortingAlgorithm.sort(repeatedNumbers)
         self.assertEqual(numbers, self.getCorrectResult())
+        self.assertEqual(repeatedNumbers, [0,2,2,2,77])
+        self.assertEqual(wrongInput, 57)
 
     def testBubbleSort(self):
         self.runTest(BubbleSort.BubbleSort())
@@ -36,8 +42,8 @@ class TestSortingAlgorithms(unittest.TestCase):
     def testMergeSort(self):
         self.runTest(MergeSort.MergeSort())
 
-    # def testQuickSort(self):
-    #     self.runTest(QuickSort.QuickSort())
+    def testQuickSort(self):
+        self.runTest(QuickSort.QuickSort())
 
 
 suite = unittest.TestLoader().loadTestsFromTestCase(TestSortingAlgorithms)

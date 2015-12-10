@@ -2,24 +2,27 @@ class ShellSort(object):
     def __init__(self):
         pass
 
-    def sort(self, list):
+    def sort(self, listToSort):
+        if type(listToSort) is not list or len(listToSort) < 1:
+            return
+
         gap = 1
-        while gap < len(list):
+        while gap < len(listToSort):
             gap = gap * 3 + 1
 
         while gap > 0:
-            for iterationStartIndex in range(gap, len(list)):
-                value = list[iterationStartIndex]
+            for iterationStartIndex in range(gap, len(listToSort)):
+                value = listToSort[iterationStartIndex]
                 currentIndex = iterationStartIndex
 
                 while currentIndex - gap >= 0:
-                    if list[currentIndex - gap] > value:
-                        list[currentIndex] = list[currentIndex - gap]
+                    if listToSort[currentIndex - gap] > value:
+                        listToSort[currentIndex] = listToSort[currentIndex - gap]
                     else:
                         break
 
                     currentIndex -= gap
 
-                list[currentIndex] = value
+                listToSort[currentIndex] = value
 
             gap = gap // 3
