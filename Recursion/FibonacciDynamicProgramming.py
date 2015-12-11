@@ -1,4 +1,5 @@
 class Fibonacci(object):
+
     def __init__(self):
         self.cache = {}
         self.cache[0] = 1
@@ -11,10 +12,8 @@ class Fibonacci(object):
         return self.naiveFibonacci(n-1) + self.naiveFibonacci(n-2)
 
     def bottomUpFibonacci(self, n):
-
         for i in range(2, n + 1):
             self.cache[i] = self.cache[i-1] + self.cache[i-2]
-
         return self.cache[n]
 
 

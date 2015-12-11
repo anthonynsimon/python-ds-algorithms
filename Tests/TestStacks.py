@@ -1,11 +1,11 @@
 import unittest
 from DataStructures import Stacks
 
+
 class TestStacks(unittest.TestCase):
 
     def testLLStack(self):
         stack = Stacks.StackLL()
-
         self.assertIsNone(stack.peek())
         self.assertEqual(stack.size(),0)
         self.assertTrue(stack.isEmpty())
@@ -43,10 +43,8 @@ class TestStacks(unittest.TestCase):
         self.assertEqual(stack.size(),0)
         self.assertTrue(stack.isEmpty())
 
-
     def testALStack(self):
         stack = Stacks.StackAA()
-
         self.assertIsNone(stack.peek())
         self.assertEqual(stack.size(),0)
         self.assertTrue(stack.isEmpty())
@@ -86,7 +84,6 @@ class TestStacks(unittest.TestCase):
 
     def testALIStack(self):
         stack = Stacks.StackAI()
-
         self.assertIsNone(stack.peek())
         self.assertEqual(stack.size(),0)
         self.assertTrue(stack.isEmpty())
@@ -123,6 +120,7 @@ class TestStacks(unittest.TestCase):
         self.assertIsNone(stack.peek())
         self.assertEqual(stack.size(),0)
         self.assertTrue(stack.isEmpty())
+
 
 suite = unittest.TestLoader().loadTestsFromTestCase(TestStacks)
 unittest.TextTestRunner(verbosity=2).run(suite)

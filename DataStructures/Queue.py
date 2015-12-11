@@ -1,4 +1,5 @@
 class QueueLLNode:
+
     def __init__(self, data):
         self.data = data
         self.next = None
@@ -6,6 +7,7 @@ class QueueLLNode:
 
 # Array based Queue
 class QueueAA:
+
     def __init__(self):
         self.front = None
         self.back = None

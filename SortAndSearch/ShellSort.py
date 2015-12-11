@@ -1,4 +1,5 @@
 class ShellSort(object):
+
     def __init__(self):
         pass
 
@@ -14,15 +15,11 @@ class ShellSort(object):
             for iterationStartIndex in range(gap, len(listToSort)):
                 value = listToSort[iterationStartIndex]
                 currentIndex = iterationStartIndex
-
                 while currentIndex - gap >= 0:
                     if listToSort[currentIndex - gap] > value:
                         listToSort[currentIndex] = listToSort[currentIndex - gap]
                     else:
                         break
-
                     currentIndex -= gap
-
                 listToSort[currentIndex] = value
-
             gap = gap // 3

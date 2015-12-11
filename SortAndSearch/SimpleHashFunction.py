@@ -1,4 +1,5 @@
 class SimpleHashFunction(object):
+
     def __init__(self, sizeOfTable):
         self.distributionTable = {}
         self.sizeOfTable = sizeOfTable
@@ -15,6 +16,7 @@ class SimpleHashFunction(object):
 
     def clearTable(self):
         self.distributionTable.clear()
+
 
 hash = SimpleHashFunction(13)
 for i in range(260):

@@ -1,4 +1,5 @@
 class BinarySearch(object):
+
     def __init__(self):
         self.steps = 0
 
@@ -10,14 +11,11 @@ class BinarySearch(object):
             result = "List contains value. Took {0} steps.".format(self.steps)
         else:
             result = "List doesn't contain value. Took {0} steps.".format(self.steps)
-
         self.steps = 0
         return result
 
-
     def containsValueWorker(self, value, numbers):
         size = len(numbers)
-
         if size == 0 or value > numbers[size-1]:
             return False
 
@@ -25,7 +23,6 @@ class BinarySearch(object):
             self.steps += 1
             size = len(numbers)
             middle = size//2
-
             if value == numbers[middle]:
                 return True
                 break
@@ -33,13 +30,11 @@ class BinarySearch(object):
                 numbers = numbers[size//2:size]
             elif value < numbers[middle]:
                 numbers = numbers[0:size//2]
-
         return False
 
     def containsValueRecursiveWorker(self, value, numbers):
         self.steps += 1
         size = len(numbers)
-
         if size == 0 or value > numbers[size-1]:
             return False
 
@@ -49,6 +44,7 @@ class BinarySearch(object):
             return self.containsValueRecursiveWorker(value, numbers[0:size//2])
         elif value > numbers[size//2]:
             return self.containsValueRecursiveWorker(value, numbers[size//2:size])
+
 
 numbers = []
 for i in range(10000000):

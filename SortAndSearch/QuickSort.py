@@ -2,6 +2,7 @@
 # Pick the pivot from the median of first, middle and last elements
 
 class QuickSort(object):
+
     def __init__(self):
         pass
 
@@ -24,7 +25,6 @@ class QuickSort(object):
                 left += 1
             while listToSort[right] > listToSort[pivot]:
                 right -= 1
-
             if left <= right:
                 listToSort[left], listToSort[right] = listToSort[right], listToSort[left]
                 right -= 1

@@ -1,6 +1,8 @@
 from DataStructures import Stacks
 
+
 class ParenthesesChecker:
+
     def __init__(self):
         self.stack = Stacks.StackAI()
 
@@ -8,7 +10,6 @@ class ParenthesesChecker:
         balanced = True
         i = 0
         self.stack.clear()
-
         while i < len(dataToCheck) and balanced is not False:
             ch = dataToCheck[i]
             if ch == "(":
@@ -22,5 +23,4 @@ class ParenthesesChecker:
 
         if self.stack.isEmpty() is False:
             balanced = False
-
         return balanced

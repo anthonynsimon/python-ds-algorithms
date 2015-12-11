@@ -1,10 +1,10 @@
 from DataStructures import Deque
 
+
 def isPalindrome(string):
     deque = Deque.Deque()
     inputStr = str(string)
     result = True
-
     for character in inputStr:
         deque.addHead(character)
 
@@ -14,8 +14,8 @@ def isPalindrome(string):
         result = deque.removeHead() == deque.removeTail()
         if result == False:
             break
-
     return result
+
 
 print(isPalindrome("radar"))
 print(isPalindrome("hello"))

@@ -11,7 +11,6 @@ def main(sideLength, degrees):
     sierpinskiAlternative(t, degrees, points)
     window.exitonclick()
 
-
 def drawTriangle(turtle,points):
     turtle.up()
     turtle.goto(points[0])
@@ -21,9 +20,7 @@ def drawTriangle(turtle,points):
     turtle.goto(points[0])
     turtle.up()
 
-
 def sierpinskiAlternative(turtle, degree, points):
-
     drawTriangle(turtle, points)
 
     if degree > 0:
@@ -41,5 +38,6 @@ def sierpinskiAlternative(turtle, degree, points):
 
         temp = [p1,points[2],p2]
         sierpinskiAlternative(turtle, degree, temp)
+
 
 main(400,6)

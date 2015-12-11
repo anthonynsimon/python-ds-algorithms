@@ -1,4 +1,5 @@
 class DecimalBaseConverter(object):
+
     def __init__(self):
         self.digits = "0123456789ABCDEF"
 
@@ -7,6 +8,7 @@ class DecimalBaseConverter(object):
             return self.digits[number]
         else:
             return self.convertToBase(number // base, base) + self.digits[number % base]
+
 
 converter = DecimalBaseConverter()
 for i in range(10001):

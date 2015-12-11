@@ -1,4 +1,5 @@
 class StackLLNode(object):
+
     def __init__(self, data, nextNode):
         self.data = data
         self.next = nextNode
@@ -6,6 +7,7 @@ class StackLLNode(object):
 
 # Linked list based Stack
 class StackLL(object):
+
     def __init__(self):
         self.top = None
         self.count = 0
@@ -28,7 +30,6 @@ class StackLL(object):
 
     def push(self, data):
         newNode = StackLLNode(data, None)
-
         if self.isEmpty():
             self.top = newNode
         else:
@@ -43,21 +44,18 @@ class StackLL(object):
 
     def __str__(self):
         contents = []
-
         if self.count > 0:
             current = self.top
-
             while current is not None:
                 contents.append(current.data)
                 current = current.next
-
             contents.reverse()
-
         return str(contents)
 
 
 # Array based Stack
 class StackAA(object):
+
     def __init__(self):
         self.list = []
 
@@ -85,6 +83,7 @@ class StackAA(object):
 
 
 class StackAI(object):
+
     def __init__(self):
         self.list = []
 

@@ -1,5 +1,6 @@
 import turtle
 
+
 def main():
     t = turtle.Turtle()
     window = turtle.Screen()
@@ -24,5 +25,6 @@ def drawSierpinskiTriangle(t, distance):
         t.left(120)
         t.forward(distance)
         drawSierpinskiTriangle(t,distance//2)
+
 
 main()

@@ -23,8 +23,8 @@ class fraction:
         number = self.number * other.denominator + self.denominator * other.number
         denominator = self.denominator * other.denominator
         common = greatestCommonDenominator(number, denominator)
-
         return fraction(number//common, denominator//common)
+
 
 myFraction = fraction(1,2)
 newFrac = myFraction + fraction(1,2)

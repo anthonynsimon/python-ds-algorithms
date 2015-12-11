@@ -1,7 +1,9 @@
 import random
 from DataStructures import Queue
 
+
 class PrintTask(object):
+
     def __init__(self, pages):
         self.pages = pages
 
@@ -9,6 +11,7 @@ class PrintTask(object):
         return int(self.pages)
 
 class Printer(object):
+
     def __init__(self, ppm):
         self.pagesPerMinute = ppm
         self.timeRemaining = 0
@@ -34,6 +37,7 @@ class Printer(object):
                 #Task is done
                 print("Job #{0}: Task done. Printed {1} pages".format(self.jobID, self.jobHistory[self.jobID]))
                 self.jobID += 1
+
         if self.timeRemaining <= 0:
             self.startNextTask()
 
@@ -56,6 +60,7 @@ class Printer(object):
         self.taskQueue.clear()
 
 class Simulation(object):
+
     def __init__(self, printer, numberOfStudents):
         self.printer = printer
         self.numberOfStudents = numberOfStudents
@@ -70,6 +75,7 @@ class Simulation(object):
 
     def hoursToSeconds(self, hours):
         return hours * 60 * 60
+
 
 simulation = Simulation(Printer(5),10)
 for i in range (10):

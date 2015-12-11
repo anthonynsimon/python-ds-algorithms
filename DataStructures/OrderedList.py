@@ -1,16 +1,16 @@
 class OrderedListNode(object):
+
     def __init__(self, initData):
         self.data = initData
         self.next = None
 
 class OrderedList(object):
+
     def __init__(self):
         self.head = None
         self.count = 0
 
-    # TODO: re-use methods for searching when possible
     def add(self, item):
-        self.count += 1
         if self.head == None:
             self.head = OrderedListNode(item)
         else:
@@ -18,7 +18,6 @@ class OrderedList(object):
             previous = None
             done = False
             newNode = OrderedListNode(item)
-
             while not done:
                 if current is None:
                     done = True
@@ -35,12 +34,12 @@ class OrderedList(object):
             else:
                 previous.next = newNode
                 newNode.next = current
+        self.count += 1
 
     def remove(self, item):
         done = False
         current = self.head
         previous = None
-
         while done == False:
             if current == None:
                 print("Couldn't find item '{0}'" .format(item))
@@ -61,7 +60,6 @@ class OrderedList(object):
     def search(self, item):
         found = False
         current = self.head
-
         while current is not None:
             if item == current.data:
                 found = True
@@ -79,7 +77,6 @@ class OrderedList(object):
     def pop(self):
         done = False
         current = self.head
-
         if self.isEmpty():
             return
 
@@ -103,7 +100,6 @@ class OrderedList(object):
     def __str__(self):
         nodes = []
         current = self.head
-
         while current is not None:
             nodes.append(current.data)
             current = current.next

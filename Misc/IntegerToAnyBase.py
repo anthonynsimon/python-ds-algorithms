@@ -5,4 +5,5 @@ def convertIntToBase(number,base):
     else:
         return convertIntToBase(number//base, base) + digits[number%base]
 
+
 print(convertIntToBase(40,2))

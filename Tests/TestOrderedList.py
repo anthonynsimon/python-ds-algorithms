@@ -1,7 +1,9 @@
 from DataStructures import OrderedList
 import unittest
 
+
 class TestOrderedList(unittest.TestCase):
+
     def test(self):
         oList = OrderedList.OrderedList()
 
@@ -44,6 +46,7 @@ class TestOrderedList(unittest.TestCase):
         oList.add(2)
 
         self.assertEqual(str(oList), "[2, 6]")
+
 
 suite = unittest.TestLoader().loadTestsFromTestCase(TestOrderedList)
 unittest.TextTestRunner(verbosity=2).run(suite)

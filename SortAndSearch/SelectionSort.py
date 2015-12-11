@@ -1,4 +1,5 @@
 class SelectionSort(object):
+
     def __init__(self):
         pass
 
@@ -9,11 +10,10 @@ class SelectionSort(object):
         for iteration in range(len(listToSort)):
             indexForMax = 0
             iterationLength = len(listToSort) - iteration
-
             for position in range(iterationLength):
                 if listToSort[position] > listToSort[indexForMax]:
                     indexForMax = position
+            self.swapContents(iterationLength-1, indexForMax, listToSort)
 
-            temp = listToSort[iterationLength - 1]
-            listToSort[iterationLength - 1] = listToSort[indexForMax]
-            listToSort[indexForMax] = temp
+    def swapContents(self, indexA, indexB, list):
+        list[indexA], list[indexB] = list[indexB], list[indexA]

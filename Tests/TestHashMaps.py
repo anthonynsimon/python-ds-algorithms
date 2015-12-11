@@ -2,7 +2,9 @@ import unittest
 from SortAndSearch import HashMapSimple
 from SortAndSearch import HashMapAlternate
 
+
 class TesthashMaps(unittest.TestCase):
+
     def testHashMapSimple(self):
         hashMap = HashMapSimple.HashMapSimple()
         hashMap.put("radar", 1554)

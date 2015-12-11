@@ -1,16 +1,13 @@
 class SequentialSearch(object):
-    def containsValue(self, value, list):
-        size = len(list)
 
-        if size == 0:
+    def containsValue(self, value, list):
+        if len(list) == 0:
             return False
 
         found = False
-
         steps = 0
-        for i in range(size):
+        for i in range(len(list)):
             steps += 1
-
             if list[i] == value:
                 found = True
                 break
@@ -20,17 +17,14 @@ class SequentialSearch(object):
             result = "List contains value. Took {0} steps.".format(steps)
         else:
             result = "List doesn't contain value. Took {0} steps.".format(steps)
-
         return result
 
     def containsValueOrderedList(self, value, list):
         size = len(list)
-        found = False
-        result = ""
-
         if size == 0:
             return False
 
+        found = False
         steps = 0
         if value <= list[size-1]:
             starting = 0
@@ -44,11 +38,11 @@ class SequentialSearch(object):
                     found = True
                     break
 
+        result = ""
         if found:
             result = "List contains value. Took {0} steps.".format(steps)
         else:
             result = "List doesn't contain value. Took {0} steps.".format(steps)
-
         return result
 
 

@@ -4,6 +4,7 @@
 # + Add "remove" method
 
 class HashMapSimple(object):
+
     def __init__(self):
         self.sizeOfTable = 64
         self.slots = [None] * self.sizeOfTable
@@ -24,7 +25,6 @@ class HashMapSimple(object):
     def put(self, key, value):
         hashValue = self.hash(key)
         done = False
-
         for i in range(self.sizeOfTable):
             if self.slots[hashValue] == None:
                 self.slots[hashValue] = key
@@ -41,7 +41,6 @@ class HashMapSimple(object):
     def get(self, key):
         hashValue = self.hash(key)
         found = False
-
         for i in range(self.sizeOfTable):
             if self.slots[hashValue] == key:
                 found = True

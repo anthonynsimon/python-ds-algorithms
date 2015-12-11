@@ -2,6 +2,7 @@
 # Write an iterative solution
 
 class MergeSort(object):
+
     def __init__(self):
         pass
 
@@ -18,6 +19,7 @@ class MergeSort(object):
         middle = len(list)//2
         left = self.sortWorker(list[0:middle])
         right = self.sortWorker(list[middle:len(list)])
+
         return self.merge(left, right)
 
     def merge(self, left, right):
@@ -25,7 +27,6 @@ class MergeSort(object):
             return right
         if not right:
             return left
-
         if left[0] < right[0]:
             return [left[0]] + self.merge(left[1:len(left)], right)
         return [right[0]] + self.merge(right[1:len(right)], left)
