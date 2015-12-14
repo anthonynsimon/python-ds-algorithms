@@ -1,2 +1,5 @@
 # Idea files
 .idea
+
+# Unnecesary files
+__pycache__
