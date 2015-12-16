@@ -1,6 +1,6 @@
 import unittest
-from SortAndSearch import HashMapSimple
-from SortAndSearch import HashMapAlternate
+from DataStructures import HashMapSimple
+from DataStructures import HashMapAlternate
 
 
 class TesthashMaps(unittest.TestCase):

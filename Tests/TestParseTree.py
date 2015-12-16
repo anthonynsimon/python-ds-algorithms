@@ -1,5 +1,5 @@
 import unittest
-from Trees.ParseTreeExample import ParseTree
+from DataStructures.Trees.ParseTreeExample import ParseTree
 
 
 class TestParseTree(unittest.TestCase):

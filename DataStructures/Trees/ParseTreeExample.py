@@ -1,6 +1,7 @@
-from DataStructures.Stacks import StackLL
-from Trees.BinaryTree import BinaryTree
 import operator
+
+from DataStructures.Stacks import StackLL
+from DataStructures.Trees.BinaryTree import BinaryTree
 
 
 class ParseTree(object):
@@ -30,7 +31,7 @@ class ParseTree(object):
         return rootTree
 
 
-    # evaluate the tree with an postorder traversal
+    # evaluate the tree with a postorder traversal
     def evaluate(self, tree):
         if tree:
             operators = {'+':operator.add, '-':operator.sub, '*':operator.mul, '/':operator.floordiv}
