@@ -22,13 +22,13 @@ class Vector2D(object):
 class Maze(object):
 
     def __init__(self,mazeFileName):
-        self.grid = []
+        self.__grid = []
         self.playerPosition = Vector2D(0,0)
         self.parseMaze(mazeFileName)
 
     def __repr__(self):
         items = []
-        for row in self.grid:
+        for row in self.__grid:
             items.append("{0}".format(row))
         return "\n".join(items)
 
@@ -36,7 +36,7 @@ class Maze(object):
         mazePosition = Vector2D(0,0)
 
         for line in open(mazeFile):
-            self.grid.append([])
+            self.__grid.append([])
             isOpen = False
             for element in line:
                 if element == '[':
@@ -46,16 +46,16 @@ class Maze(object):
                 elif isOpen == True:
                     if element == PLAYER:
                         self.playerPosition = Vector2D(mazePosition.x, mazePosition.y)
-                    self.grid[mazePosition.y].append(element)
+                    self.__grid[mazePosition.y].append(element)
                     mazePosition.x += 1
             mazePosition.x = 0
             mazePosition.y += 1
 
     def getGridCell(self,atX,atY):
-        return self.grid[atY][atX]
+        return self.__grid[atY][atX]
 
     def setGridCell(self, atX, atY, value):
-        self.grid[atY][atX] = value
+        self.__grid[atY][atX] = value
 
     def movePlayer(self, newVector):
         newCell = self.getGridCell(newVector.x, newVector.y)
@@ -73,10 +73,10 @@ class Maze(object):
 class MazeSolver:
 
     def __init__(self, maze):
-        self.maze = maze
-        self.pathsGrid = deepcopy(self.maze.grid)
+        self.__maze = maze
+        self.__pathsGrid = deepcopy(self.__maze.grid)
 
-        if self.solve(self.maze.playerPosition):
+        if self.solve(self.__maze.playerPosition):
             print("Maze solved!")
         else:
             print("Couldn't solve maze...")
@@ -84,18 +84,18 @@ class MazeSolver:
 
     def __repr__(self):
         items = []
-        for row in self.pathsGrid:
+        for row in self.__pathsGrid:
             items.append("{0}".format(row))
         return "\n".join(items)
 
     def solve(self, vector):
-        cell = self.pathsGrid[vector.y][vector.x]
+        cell = self.__pathsGrid[vector.y][vector.x]
         if cell == EXIT:
             return True
         elif cell == TRIED or cell == OBSTACLE:
             return False
 
-        self.pathsGrid[vector.y][vector.x] = TRIED
+        self.__pathsGrid[vector.y][vector.x] = TRIED
         if self.solve(Vector2D(vector.x, vector.y-1)):
             return True
         elif self.solve(Vector2D(vector.x, vector.y+1)):

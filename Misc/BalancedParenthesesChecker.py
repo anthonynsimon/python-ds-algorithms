@@ -4,23 +4,23 @@ from DataStructures import Stacks
 class ParenthesesChecker:
 
     def __init__(self):
-        self.stack = Stacks.StackAI()
+        self.__stack = Stacks.StackAI()
 
     def check(self, dataToCheck):
         balanced = True
         i = 0
-        self.stack.clear()
+        self.__stack.clear()
         while i < len(dataToCheck) and balanced is not False:
             ch = dataToCheck[i]
             if ch == "(":
-                self.stack.push(ch)
+                self.__stack.push(ch)
             elif ch == ")":
-                if self.stack.isEmpty():
+                if self.__stack.isEmpty():
                     balanced = False
                 else:
-                    self.stack.pop()
+                    self.__stack.pop()
             i += 1
 
-        if self.stack.isEmpty() is False:
+        if self.__stack.isEmpty() is False:
             balanced = False
         return balanced

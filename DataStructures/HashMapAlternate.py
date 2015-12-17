@@ -16,11 +16,11 @@ class HashMapNode(object):
 class HashMapAlternate(object):
 
     def __init__(self):
-        self.sizeOfTable = 64
-        self.slots = [None] * self.sizeOfTable
-        self.distributionTable = [0] * self.sizeOfTable
-        for i in range(self.sizeOfTable):
-            self.slots[i] = HashMapNode()
+        self.__sizeOfTable = 64
+        self.__slots = [None] * self.__sizeOfTable
+        self.__distributionTable = [0] * self.__sizeOfTable
+        for i in range(self.__sizeOfTable):
+            self.__slots[i] = HashMapNode()
 
     def hash(self, key):
         if type(key) is str:
@@ -31,17 +31,17 @@ class HashMapAlternate(object):
                 position += 1
             key = sum
 
-        return key % self.sizeOfTable
+        return key % self.__sizeOfTable
 
     def put(self, key, value):
         hashValue = self.hash(key)
-        currentNode = self.slots[hashValue]
+        currentNode = self.__slots[hashValue]
         done = False
         while not done:
             if currentNode.key == None: # case for first node
                 currentNode.key = key
                 currentNode.value = value
-                self.distributionTable[hashValue] += 1
+                self.__distributionTable[hashValue] += 1
                 done = True
             elif currentNode.key == key: # replace existing value for key
                 currentNode.value = value
@@ -51,14 +51,14 @@ class HashMapAlternate(object):
                     currentNode.next = HashMapNode()
                     currentNode.next.key = key
                     currentNode.next.value = value
-                    self.distributionTable[hashValue] += 1
+                    self.__distributionTable[hashValue] += 1
                     done = True
                 else: # move to the next node
                     currentNode = currentNode.next
 
     def get(self, key):
         hashValue = self.hash(key)
-        currentNode = self.slots[hashValue]
+        currentNode = self.__slots[hashValue]
         done = False
         while not done:
             if currentNode.key == key: # we found the key
@@ -75,19 +75,19 @@ class HashMapAlternate(object):
 
     def remove(self, key):
         hashValue = self.hash(key)
-        currentNode = self.slots[hashValue]
+        currentNode = self.__slots[hashValue]
         previousNode = None
         done = False
         while not done:
             if currentNode.key == key:
                 if previousNode is None: # we are at the beginning of the list
                     if currentNode.next is None:
-                        self.slots[hashValue] = HashMapNode()
+                        self.__slots[hashValue] = HashMapNode()
                     else:
-                        self.slots[hashValue] = currentNode.next # change the links
+                        self.__slots[hashValue] = currentNode.next # change the links
                 else:
                     previousNode.next = currentNode.next
-                self.distributionTable[hashValue] -= 1
+                self.__distributionTable[hashValue] -= 1
                 done = True
             elif currentNode.next is not None:
                 previousNode = currentNode
@@ -102,9 +102,9 @@ class HashMapAlternate(object):
 
     def __repr__(self):
         hashmapRepresentation = []
-        for i in range(self.sizeOfTable):
+        for i in range(self.__sizeOfTable):
             items = []
-            currentNode = self.slots[i]
+            currentNode = self.__slots[i]
             while currentNode is not None:
                 items.append(str(currentNode))
                 currentNode = currentNode.next

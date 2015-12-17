@@ -3,10 +3,10 @@
 class MinimumCoinChange(object):
 
     def __init__(self):
-        self.coins = ["200","100","50","20","10","5","2","1"]
+        self.__coins = ["200", "100", "50", "20", "10", "5", "2", "1"]
 
     def getMinimumChange(self, amount):
-        print(self.getMinimumChangeWorker(amount, self.coins))
+        print(self.getMinimumChangeWorker(amount, self.__coins))
 
     def getMinimumChangeWorker(self, amount, coins):
         currentMax = int(coins[0])

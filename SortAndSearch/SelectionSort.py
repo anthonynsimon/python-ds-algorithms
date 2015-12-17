@@ -1,8 +1,5 @@
 class SelectionSort(object):
 
-    def __init__(self):
-        pass
-
     def sort(self, listToSort):
         if type(listToSort) is not list or len(listToSort) < 1:
             return

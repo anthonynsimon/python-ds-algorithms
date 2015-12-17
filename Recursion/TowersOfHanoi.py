@@ -14,26 +14,26 @@ class HanoiDisk(object):
 class Tower(object):
 
     def __init__(self):
-        self.stack = Stacks.StackAA()
+        self.__stack = Stacks.StackAA()
 
     def addToTop(self, disk):
-        if self.stack.isEmpty() != True:
-            if disk.size > int(self.stack.peek()):
+        if self.__stack.isEmpty() != True:
+            if disk.size > int(self.__stack.peek()):
                 raise "Illegal move!"
                 return
-        self.stack.push(disk)
+        self.__stack.push(disk)
 
     def removeFromTop(self):
-        if self.stack.isEmpty() != True:
-            return self.stack.pop()
+        if self.__stack.isEmpty() != True:
+            return self.__stack.pop()
         else:
             print("Tower is empty.")
 
     def peekTop(self):
-        return int(self.stack.peek())
+        return int(self.__stack.peek())
 
     def __str__(self):
-        return str(self.stack)
+        return str(self.__stack)
 
 class TowersSet(object):
 
@@ -66,7 +66,7 @@ class TowersSet(object):
             self.numberOfMoves += 1
 
     def isSolved(self):
-        if str(self.solution) == str(self.towerC.stack):
+        if str(self.solution) == str(self.towerC.__stack):
             return True
         else:
             return False
@@ -74,15 +74,15 @@ class TowersSet(object):
 class HanoiSolver(object):
 
     def __init__(self, towers):
-        self.towers = towers
+        self.__towers = towers
 
     def solve(self):
-        self.solveWorker(self.towers.towerA.stack.size(), self.towers.towerA, self.towers.towerC, self.towers.towerB)
+        self.solveWorker(self.__towers.towerA.stack.size(), self.__towers.towerA, self.__towers.towerC, self.__towers.towerB)
 
     def solveWorker(self, height, source, destination, spare):
         if height >= 1:
             self.solveWorker(height-1, source, spare, destination)
-            self.towers.moveDisk(source, destination)
+            self.__towers.moveDisk(source, destination)
             self.solveWorker(height-1, spare, destination, source)
 
 

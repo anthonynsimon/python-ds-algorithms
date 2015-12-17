@@ -13,51 +13,51 @@ class PrintTask(object):
 class Printer(object):
 
     def __init__(self, ppm):
-        self.pagesPerMinute = ppm
-        self.timeRemaining = 0
-        self.currentTask = None
-        self.taskQueue = Queue.QueueAA()
-        self.waitingTimes = []
-        self.jobHistory = {}
-        self.jobID = 1000
+        self.__pagesPerMinute = ppm
+        self.__timeRemaining = 0
+        self.__currentTask = None
+        self.__taskQueue = Queue.QueueAA()
+        self.__waitingTimes = []
+        self.__jobHistory = {}
+        self.__jobID = 1000
 
     def startNextTask(self):
-        self.currentTask = self.taskQueue.dequeue()
-        if self.currentTask != None:
+        self.__currentTask = self.__taskQueue.dequeue()
+        if self.__currentTask != None:
             #Task is starting
-            print("Job #{0}: Starting new print task...".format(self.jobID))
-            self.jobHistory[self.jobID] = self.currentTask.getPages()
-            self.timeRemaining = self.currentTask.getPages() * 60/self.pagesPerMinute
-            self.waitingTimes.append(self.timeRemaining)
+            print("Job #{0}: Starting new print task...".format(self.__jobID))
+            self.__jobHistory[self.__jobID] = self.__currentTask.getPages()
+            self.__timeRemaining = self.__currentTask.getPages() * 60 / self.__pagesPerMinute
+            self.__waitingTimes.append(self.__timeRemaining)
 
     def tick(self):
-        if self.currentTask != None:
-            self.timeRemaining -= 1
-            if self.timeRemaining <= 0:
+        if self.__currentTask != None:
+            self.__timeRemaining -= 1
+            if self.__timeRemaining <= 0:
                 #Task is done
-                print("Job #{0}: Task done. Printed {1} pages".format(self.jobID, self.jobHistory[self.jobID]))
-                self.jobID += 1
+                print("Job #{0}: Task done. Printed {1} pages".format(self.__jobID, self.__jobHistory[self.__jobID]))
+                self.__jobID += 1
 
-        if self.timeRemaining <= 0:
+        if self.__timeRemaining <= 0:
             self.startNextTask()
 
     def addPrintTask(self, task):
-        self.taskQueue.enqueue(task)
+        self.__taskQueue.enqueue(task)
 
     def isBusy(self):
-        return self.currentTask != None
+        return self.__currentTask != None
 
     def averageWaitingTime(self):
-        return sum(self.waitingTimes)/len(self.waitingTimes)
+        return sum(self.__waitingTimes) / len(self.__waitingTimes)
 
     def averagePages(self):
-        return sum(self.jobHistory.values())/len(self.jobHistory)
+        return sum(self.__jobHistory.values()) / len(self.__jobHistory)
 
     def resetHistory(self):
-        self.waitingTimes = []
+        self.__waitingTimes = []
 
     def resetPrintQueue(self):
-        self.taskQueue.clear()
+        self.__taskQueue.clear()
 
 class Simulation(object):
 

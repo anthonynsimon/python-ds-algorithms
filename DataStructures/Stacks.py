@@ -9,43 +9,43 @@ class StackLLNode(object):
 class StackLL(object):
 
     def __init__(self):
-        self.top = None
-        self.count = 0
+        self.__top = None
+        self.__count = 0
 
     def size(self):
-        return self.count
+        return self.__count
 
     def isEmpty(self):
         return True if 0 >= self.size() else False
 
     def peek(self):
-        return None if self.isEmpty() else self.top.data
+        return None if self.isEmpty() else self.__top.data
 
     def pop(self):
         if not self.isEmpty():
-            holder = self.top.data
-            self.top = self.top.next
-            self.count -= 1
+            holder = self.__top.data
+            self.__top = self.__top.next
+            self.__count -= 1
             return holder
 
     def push(self, data):
         newNode = StackLLNode(data, None)
         if self.isEmpty():
-            self.top = newNode
+            self.__top = newNode
         else:
-            newNode.next = self.top
-            self.top = newNode
+            newNode.next = self.__top
+            self.__top = newNode
 
-        self.count += 1
+        self.__count += 1
 
     def clear(self):
-        self.count = 0
-        self.top = None
+        self.__count = 0
+        self.__top = None
 
     def __str__(self):
         contents = []
-        if self.count > 0:
-            current = self.top
+        if self.__count > 0:
+            current = self.__top
             while current is not None:
                 contents.append(current.data)
                 current = current.next

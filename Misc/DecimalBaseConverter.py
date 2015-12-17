@@ -1,13 +1,13 @@
 class DecimalBaseConverter(object):
 
     def __init__(self):
-        self.digits = "0123456789ABCDEF"
+        self.__digits = "0123456789ABCDEF"
 
     def convertToBase(self, number, base):
         if number < base:
-            return self.digits[number]
+            return self.__digits[number]
         else:
-            return self.convertToBase(number // base, base) + self.digits[number % base]
+            return self.convertToBase(number // base, base) + self.__digits[number % base]
 
 
 converter = DecimalBaseConverter()

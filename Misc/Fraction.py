@@ -1,5 +1,5 @@
 def greatestCommonDenominator(m, n):
-    while m%n != 0:
+    while m % n != 0:
         oldm = m
         oldn = n
 
@@ -10,18 +10,18 @@ def greatestCommonDenominator(m, n):
 class fraction:
 
     def __init__(self, top, bottom):
-        self.number = top
-        self.denominator = bottom
+        self.__number = top
+        self.__denominator = bottom
 
     def __str__(self):
-        return "{0}/{1}".format(self.number, self.denominator)
+        return "{0}/{1}".format(self.__number, self.__denominator)
 
     def asDecimal(self):
-        return self.number / self.denominator
+        return self.__number / self.__denominator
 
     def __add__(self, other):
-        number = self.number * other.denominator + self.denominator * other.number
-        denominator = self.denominator * other.denominator
+        number = self.__number * other.denominator + self.__denominator * other.number
+        denominator = self.__denominator * other.denominator
         common = greatestCommonDenominator(number, denominator)
         return fraction(number//common, denominator//common)
 

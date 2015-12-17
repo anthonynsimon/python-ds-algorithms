@@ -1,36 +1,36 @@
 class BinaryTree(object):
     def __init__(self, rootKey):
-        self.rootKey = rootKey
-        self.leftChild = None
-        self.rightChild = None
+        self.__rootKey = rootKey
+        self.__leftChild = None
+        self.__rightChild = None
 
     def insertLeftChild(self, newNode):
-        if self.leftChild is None:
-            self.leftChild = BinaryTree(newNode)
+        if self.__leftChild is None:
+            self.__leftChild = BinaryTree(newNode)
         else:
             branch = BinaryTree(newNode)
-            branch.leftChild = self.leftChild
-            self.leftChild = branch
+            branch.__leftChild = self.__leftChild
+            self.__leftChild = branch
 
     def insertRightChild(self, newNode):
-        if self.rightChild is None:
-            self.rightChild = BinaryTree(newNode)
+        if self.__rightChild is None:
+            self.__rightChild = BinaryTree(newNode)
         else:
             branch = BinaryTree(newNode)
-            branch.rightChild = self.rightChild
-            self.rightChild = branch
+            branch.__rightChild = self.__rightChild
+            self.__rightChild = branch
 
     def getLeftChild(self):
-        return self.leftChild
+        return self.__leftChild
 
     def getRightChild(self):
-        return self.rightChild
+        return self.__rightChild
 
     def setRootKey(self, rootKey):
-        self.rootKey = rootKey
+        self.__rootKey = rootKey
 
     def getRootKey(self):
-        return self.rootKey
+        return self.__rootKey
 
     def __repr__(self):
         return str(self.traversePreorder(self))

@@ -6,9 +6,9 @@
 class HashMapSimple(object):
 
     def __init__(self):
-        self.sizeOfTable = 64
-        self.slots = [None] * self.sizeOfTable
-        self.data = [None] * self.sizeOfTable
+        self.__sizeOfTable = 64
+        self.__slots = [None] * self.__sizeOfTable
+        self.__data = [None] * self.__sizeOfTable
 
     def hash(self, key):
         if type(key) is str:
@@ -17,22 +17,22 @@ class HashMapSimple(object):
             for ch in key:
                 sum += ord(ch) * position
             key = sum
-        return key % self.sizeOfTable
+        return key % self.__sizeOfTable
 
     def rehash(self, oldHash):
-        return (oldHash + 1) % self.sizeOfTable
+        return (oldHash + 1) % self.__sizeOfTable
 
     def put(self, key, value):
         hashValue = self.hash(key)
         done = False
-        for i in range(self.sizeOfTable):
-            if self.slots[hashValue] == None:
-                self.slots[hashValue] = key
-                self.data[hashValue] = value
+        for i in range(self.__sizeOfTable):
+            if self.__slots[hashValue] == None:
+                self.__slots[hashValue] = key
+                self.__data[hashValue] = value
                 done = True
                 break
-            elif self.slots[hashValue] == key:
-                self.data[hashValue] = value
+            elif self.__slots[hashValue] == key:
+                self.__data[hashValue] = value
                 done = True
                 break
             else:
@@ -41,14 +41,14 @@ class HashMapSimple(object):
     def get(self, key):
         hashValue = self.hash(key)
         found = False
-        for i in range(self.sizeOfTable):
-            if self.slots[hashValue] == key:
+        for i in range(self.__sizeOfTable):
+            if self.__slots[hashValue] == key:
                 found = True
                 break
             else:
                 hashValue = self.rehash(hashValue)
 
         if found:
-            return self.data[hashValue]
+            return self.__data[hashValue]
         else:
             return False

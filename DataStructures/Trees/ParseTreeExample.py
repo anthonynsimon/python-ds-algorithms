@@ -1,5 +1,4 @@
 import operator
-
 from DataStructures.Stacks import StackLL
 from DataStructures.Trees.BinaryTree import BinaryTree
 

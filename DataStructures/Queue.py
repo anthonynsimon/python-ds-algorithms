@@ -9,31 +9,31 @@ class QueueLLNode:
 class QueueAA:
 
     def __init__(self):
-        self.front = None
-        self.back = None
-        self.list = []
+        self.__front = None
+        self.__back = None
+        self.__list = []
 
     def enqueue(self, data):
-        self.list.insert(0, data)
+        self.__list.insert(0, data)
 
     def dequeue(self):
         if not self.isEmpty():
-            return self.list.pop()
+            return self.__list.pop()
 
     def isEmpty(self):
-        return False if len(self.list) > 0 else True
+        return False if len(self.__list) > 0 else True
 
     def size(self):
-        return len(self.list)
+        return len(self.__list)
 
     def peek(self):
         if not self.isEmpty():
-            return self.list[self.size()-1]
+            return self.__list[self.size() - 1]
 
     def clear(self):
-        self.front = None
-        self.back = None
-        self.list = []
+        self.__front = None
+        self.__back = None
+        self.__list = []
 
 
 # Linked list based Queue

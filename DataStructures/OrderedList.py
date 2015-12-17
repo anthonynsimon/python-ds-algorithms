@@ -7,14 +7,14 @@ class OrderedListNode(object):
 class OrderedList(object):
 
     def __init__(self):
-        self.head = None
-        self.count = 0
+        self.__head = None
+        self.__count = 0
 
     def add(self, item):
-        if self.head == None:
-            self.head = OrderedListNode(item)
+        if self.__head == None:
+            self.__head = OrderedListNode(item)
         else:
-            current = self.head
+            current = self.__head
             previous = None
             done = False
             newNode = OrderedListNode(item)
@@ -29,16 +29,16 @@ class OrderedList(object):
                         current = current.next
 
             if previous is None:
-                newNode.next = self.head
-                self.head = newNode
+                newNode.next = self.__head
+                self.__head = newNode
             else:
                 previous.next = newNode
                 newNode.next = current
-        self.count += 1
+        self.__count += 1
 
     def remove(self, item):
         done = False
-        current = self.head
+        current = self.__head
         previous = None
         while done == False:
             if current == None:
@@ -46,9 +46,9 @@ class OrderedList(object):
                 done = True
             else:
                 if item == current.data:
-                    self.count -= 1
+                    self.__count -= 1
                     if previous == None:
-                        self.head = current.next
+                        self.__head = current.next
                     else:
                         previous.next = current.next
                     done = True
@@ -59,7 +59,7 @@ class OrderedList(object):
 
     def search(self, item):
         found = False
-        current = self.head
+        current = self.__head
         while current is not None:
             if item == current.data:
                 found = True
@@ -72,34 +72,34 @@ class OrderedList(object):
         return True if self.size() == 0 else False
 
     def size(self):
-        return self.count
+        return self.__count
 
     def pop(self):
         done = False
-        current = self.head
+        current = self.__head
         if self.isEmpty():
             return
 
         if self.size() == 1:
-            temp  = self.head.data
-            self.head = None
-            self.count -= 1
+            temp  = self.__head.data
+            self.__head = None
+            self.__count -= 1
             return temp
         else:
             while current.next.next is not None:
                 current = current.next
             temp = current.next.data
             current.next = None
-            self.count -= 1
+            self.__count -= 1
             return temp
 
     def clear(self):
-        self.head = None
-        self.count = 0
+        self.__head = None
+        self.__count = 0
 
     def __str__(self):
         nodes = []
-        current = self.head
+        current = self.__head
         while current is not None:
             nodes.append(current.data)
             current = current.next
