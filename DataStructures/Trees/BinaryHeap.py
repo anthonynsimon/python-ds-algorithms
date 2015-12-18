@@ -1,3 +1,6 @@
+# TODO:
+# Add MaxHeap
+
 class BinaryHeap(object):
 
     def __init__(self):
