@@ -31,8 +31,8 @@ class TestBinarySearchTree(unittest.TestCase):
         bstTree[50] = 768
 
         self.assertEqual(bstTree[50], 768)
-        bstTree.remove(50)
-        #del bstTree[50]
+        #bstTree.remove(50)
+        del bstTree[50]
         self.assertEqual(bstTree[50], None)
 
         for node in bstTree:

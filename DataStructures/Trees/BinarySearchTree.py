@@ -57,6 +57,15 @@ class BSTNode(object):
         self.rightChild = rightChild
         self.parent = parent
 
+    def getSubtreeSize(self):
+        leftSize = 0
+        rightSize = 0
+        if self.hasLeftChild():
+            leftSize += self.getLeftChild().getSubtreeSize()
+        if self.hasRightChild():
+            rightSize += self.getRightChild().getSubtreeSize()
+        return 1 + leftSize + rightSize
+
     def __repr__(self):
         return "'{0}' : {1}".format(self.key,self.value)
         #return "{0}".format(self.key)
@@ -71,15 +80,15 @@ class BSTNode(object):
 class BinarySearchTree(object):
 
     def __init__(self):
-        self.__root = None
-        self.__count = 0
+        self.root = None
+        self.count = 0
 
     def put(self, key, value):
-        if self.__root is None:
-            self.__root = BSTNode(key, value)
-            self.__count = 1
+        if self.root is None:
+            self.root = BSTNode(key, value)
+            self.count = 1
         else:
-            currentNode = self.__root
+            currentNode = self.root
             done = False
             while not done:
                 if currentNode.key == key:
@@ -97,11 +106,11 @@ class BinarySearchTree(object):
                     else:
                         currentNode.rightChild = BSTNode(key,value,None,None,currentNode)
                         done = True
-            self.__count += 1
+            self.count += 1
 
     def get(self, key):
         if key is not None:
-            currentNode = self.__root
+            currentNode = self.root
         done = False
         while not done:
             if currentNode.key == key:
@@ -129,8 +138,8 @@ class BinarySearchTree(object):
         if nodeToRemove:
             # If it has no children
             if nodeToRemove.isLeaf():
-                if nodeToRemove == self.__root:
-                    nodeToRemove = None
+                if nodeToRemove == self.root:
+                    self.root = None
                 elif nodeToRemove == nodeToRemove.parent.getLeftChild():
                     nodeToRemove.parent.leftChild = None
                 else:
@@ -138,7 +147,7 @@ class BinarySearchTree(object):
 
             # If it has both children
             elif nodeToRemove.hasBothChildren():
-                successorNode = self.__getSuccessor(nodeToRemove)
+                successorNode = self.getSuccessor(nodeToRemove)
                 tempKey = successorNode.key
                 tempValue = successorNode.value
                 self.remove(successorNode.key) # must clear it before changing the BST path
@@ -149,9 +158,9 @@ class BinarySearchTree(object):
             else:
                 if nodeToRemove.hasLeftChild():
                     leftNode = nodeToRemove.getLeftChild()
-                    if nodeToRemove == self.__root:
+                    if nodeToRemove == self.root:
                         leftNode.parent = None
-                        self.__root = leftNode
+                        self.root = leftNode
                     else:
                         if nodeToRemove.isLeftChild():
                             nodeToRemove.parent.leftChild = leftNode
@@ -160,32 +169,32 @@ class BinarySearchTree(object):
                         leftNode.parent = nodeToRemove.parent
                 else:
                     rightNode = nodeToRemove.getRightChild()
-                    if nodeToRemove == self.__root:
+                    if nodeToRemove == self.root:
                         rightNode.parent = None
-                        self.__root = rightNode
+                        self.root = rightNode
                     else:
                         if nodeToRemove.isLeftChild():
                             nodeToRemove.parent.leftChild = rightNode
                         elif nodeToRemove.isRightChild():
                             nodeToRemove.parent.rightChild = rightNode
                         rightNode.parent = nodeToRemove.parent
-            self.__count -= 1
+            self.count -= 1
 
     def getMin(self):
-        if self.__root:
-            currentNode = self.__root
+        if self.root:
+            currentNode = self.root
             while currentNode.hasLeftChild():
                 currentNode = currentNode.getLeftChild()
             return currentNode
 
     def getMax(self):
-        if self.__root:
-            currentNode = self.__root
+        if self.root:
+            currentNode = self.root
             while currentNode.hasRightChild():
                 currentNode = currentNode.getRightChild()
             return currentNode
 
-    def __getSuccessor(self, startingNode):
+    def getSuccessor(self, startingNode):
         successorNode = startingNode.getRightChild()
         while successorNode.hasLeftChild():
             successorNode = successorNode.getLeftChild()
@@ -203,22 +212,29 @@ class BinarySearchTree(object):
         self.remove(key)
 
     def __len__(self):
-        return self.__count
+        return self.count
 
     def __contains__(self, key):
         if self.get(key):
             return True
 
     def __repr__(self):
-        if self.__root is not None and type(self.__root) is BSTNode:
+        if self.root is not None:
+            def reprHelper(node, items):
+                if node:
+                    if node.hasLeftChild():
+                        reprHelper(node.getLeftChild(), items)
+                    items.append(node)
+                    if node.hasRightChild():
+                        reprHelper(node.getRightChild(), items)
             items = []
-            self.reprHelper(self.__root, items)
+            reprHelper(self.root, items)
             return str(items)
         return "[]"
 
     def __iter__(self):
-        if self.__root:
-            startNode = self.__root
+        if self.root:
+            startNode = self.root
             items = []
             self.iterHelper(startNode, items)
             for item in items:
@@ -231,18 +247,9 @@ class BinarySearchTree(object):
         if node.hasRightChild():
             self.iterHelper(node.getRightChild(), items)
 
-
-    def reprHelper(self, node, items):
-        if node:
-            if node.hasLeftChild():
-                self.reprHelper(node.getLeftChild(), items)
-            items.append(node)
-            if node.hasRightChild():
-                self.reprHelper(node.getRightChild(), items)
-
-    def visualize(self, level=0, node=None):
+    def visualizeHorizontal(self, level=0, node=None):
         if node is None:
-            node = self.__root
+            node = self.root
         adder = "Root = "
         if node.isLeftChild():
             adder = "Left = "
@@ -251,3 +258,32 @@ class BinarySearchTree(object):
         print ('\t' * level + adder + repr(node))
         for child in node:
             self.visualize(level + 1, child)
+
+    def visualizeVertical(self):
+        if self.root is None: return '<empty tree>'
+        def recurse(node):
+            if node is None: return [], 0, 0
+            label = str(node.key)
+            left_lines, left_pos, left_width = recurse(node.getLeftChild())
+            right_lines, right_pos, right_width = recurse(node.getRightChild())
+            middle = max(right_pos + left_width - left_pos + 1, len(label), 2)
+            pos = left_pos + middle // 2
+            width = left_pos + middle + right_width - right_pos
+            while len(left_lines) < len(right_lines):
+                left_lines.append(' ' * left_width)
+            while len(right_lines) < len(left_lines):
+                right_lines.append(' ' * right_width)
+            if (middle - len(label)) % 2 == 1 and node.parent is not None and \
+               node is node.parent.getLeftChild() and len(label) < middle:
+                label += '.'
+            label = label.center(middle, '.')
+            if label[0] == '.': label = ' ' + label[1:]
+            if label[-1] == '.': label = label[:-1] + ' '
+            lines = [' ' * left_pos + label + ' ' * (right_width - right_pos),
+                     ' ' * left_pos + '/' + ' ' * (middle-2) +
+                     '\\' + ' ' * (right_width - right_pos)] + \
+              [left_line + ' ' * (width - left_width - right_width) +
+               right_line
+               for left_line, right_line in zip(left_lines, right_lines)]
+            return lines, pos, width
+        print '\n'.join(recurse(self.root)[0])
