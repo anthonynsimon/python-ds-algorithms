@@ -1,13 +1,10 @@
-# TODO
-# Create AVL Tree based on this one
-
 class BSTNode(object):
 
     def __init__(self, key, value=None, leftChild=None, rightChild=None, parent=None):
         self.key = key
         self.value = value
-        self.leftChild = leftChild
-        self.rightChild = rightChild
+        self.left = leftChild
+        self.right = rightChild
         self.parent = parent
 
     def isLeaf(self):
@@ -33,29 +30,22 @@ class BSTNode(object):
         return self.hasLeftChild() and self.hasRightChild()
 
     def hasLeftChild(self):
-        return self.leftChild is not None
+        return self.left is not None
 
     def hasRightChild(self):
-        return self.rightChild is not None
+        return self.right is not None
 
     def getLeftChild(self):
         if self.hasLeftChild():
-            return self.leftChild
+            return self.left
 
     def getRightChild(self):
         if self.hasRightChild():
-            return self.rightChild
+            return self.right
 
     def getParent(self):
         if not self.isRoot():
             return self.parent
-
-    def replaceContentsInPlace(self, key, value=None, leftChild=None, rightChild=None, parent=None):
-        self.key = key
-        self.value = value
-        self.leftChild = leftChild
-        self.rightChild = rightChild
-        self.parent = parent
 
     def getSubtreeSize(self):
         leftSize = 0
@@ -66,15 +56,26 @@ class BSTNode(object):
             rightSize += self.getRightChild().getSubtreeSize()
         return 1 + leftSize + rightSize
 
+    def getSubtreeHeight(self):
+        leftHeight = 0
+        rightHeight = 0
+        if self.hasLeftChild():
+            leftHeight += 1
+            leftHeight += self.getLeftChild().getSubtreeHeight()
+        if self.hasRightChild():
+            rightHeight += 1
+            rightHeight += self.getRightChild().getSubtreeHeight()
+        return max(leftHeight, rightHeight)
+
     def __repr__(self):
-        return "'{0}' : {1}".format(self.key,self.value)
         #return "{0}".format(self.key)
+        return "'{0}' : {1}".format(self.key,self.value)
 
     def __iter__(self):
         if self.hasLeftChild():
-            yield self.leftChild
+            yield self.left
         if self.hasRightChild():
-            yield self.rightChild
+            yield self.right
 
 
 class BinarySearchTree(object):
@@ -98,13 +99,13 @@ class BinarySearchTree(object):
                     if currentNode.hasLeftChild():
                         currentNode = currentNode.getLeftChild()
                     else:
-                        currentNode.leftChild = BSTNode(key,value,None,None,currentNode)
+                        currentNode.left = BSTNode(key, value, None, None, currentNode)
                         done = True
                 elif currentNode.key < key:
                     if currentNode.hasRightChild():
                         currentNode = currentNode.getRightChild()
                     else:
-                        currentNode.rightChild = BSTNode(key,value,None,None,currentNode)
+                        currentNode.right = BSTNode(key, value, None, None, currentNode)
                         done = True
             self.count += 1
 
@@ -141,9 +142,9 @@ class BinarySearchTree(object):
                 if nodeToRemove == self.root:
                     self.root = None
                 elif nodeToRemove == nodeToRemove.parent.getLeftChild():
-                    nodeToRemove.parent.leftChild = None
+                    nodeToRemove.parent.left = None
                 else:
-                    nodeToRemove.parent.rightChild = None
+                    nodeToRemove.parent.right = None
 
             # If it has both children
             elif nodeToRemove.hasBothChildren():
@@ -163,9 +164,9 @@ class BinarySearchTree(object):
                         self.root = leftNode
                     else:
                         if nodeToRemove.isLeftChild():
-                            nodeToRemove.parent.leftChild = leftNode
+                            nodeToRemove.parent.left = leftNode
                         elif nodeToRemove.isRightChild():
-                            nodeToRemove.parent.rightChild = leftNode
+                            nodeToRemove.parent.right = leftNode
                         leftNode.parent = nodeToRemove.parent
                 else:
                     rightNode = nodeToRemove.getRightChild()
@@ -174,9 +175,9 @@ class BinarySearchTree(object):
                         self.root = rightNode
                     else:
                         if nodeToRemove.isLeftChild():
-                            nodeToRemove.parent.leftChild = rightNode
+                            nodeToRemove.parent.left = rightNode
                         elif nodeToRemove.isRightChild():
-                            nodeToRemove.parent.rightChild = rightNode
+                            nodeToRemove.parent.right = rightNode
                         rightNode.parent = nodeToRemove.parent
             self.count -= 1
 
@@ -199,6 +200,12 @@ class BinarySearchTree(object):
         while successorNode.hasLeftChild():
             successorNode = successorNode.getLeftChild()
         return successorNode
+
+    def getPredecessor(self, startingNode):
+        predecessor = startingNode.getLeftChild()
+        while predecessor.hasRightChild():
+            predecessor = predecessor.getRightChild()
+        return predecessor
 
     def __getitem__(self, item):
         result =  self.get(item)
@@ -286,4 +293,6 @@ class BinarySearchTree(object):
                right_line
                for left_line, right_line in zip(left_lines, right_lines)]
             return lines, pos, width
-        print '\n'.join(recurse(self.root)[0])
+        print("\n")
+        print ('\n'.join(recurse(self.root)[0]))
+        print("\n")

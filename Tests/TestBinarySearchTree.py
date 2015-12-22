@@ -1,4 +1,5 @@
 import unittest
+import random
 from DataStructures.Trees import BinarySearchTree
 
 
@@ -31,16 +32,18 @@ class TestBinarySearchTree(unittest.TestCase):
         bstTree[50] = 768
 
         self.assertEqual(bstTree[50], 768)
-        #bstTree.remove(50)
         del bstTree[50]
         self.assertEqual(bstTree[50], None)
 
-        for node in bstTree:
-            print(node)
+        for i in range(150):
+            bstTree.put(i, None)
 
-        bstTree.visualize()
+        for i in range(150):
+            del bstTree[random.randrange(0,150)]
 
-        print(bstTree)
+        bstTree.visualizeVertical()
+
+        print("height", bstTree.root.getSubtreeHeight())
 
 
 suite = unittest.TestLoader().loadTestsFromTestCase(TestBinarySearchTree)

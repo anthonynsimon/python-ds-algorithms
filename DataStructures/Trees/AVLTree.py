@@ -2,12 +2,13 @@ from DataStructures.Trees import BinarySearchTree
 
 class AVLNode(BinarySearchTree.BSTNode):
     def getBalanceFactor(self):
-        balanceFactor = 0
+        leftSide = 0
+        rightSide = 0
         if self.hasLeftChild():
-            balanceFactor -= self.getLeftChild().getSubtreeSize()
+            leftSide = self.getLeftChild().getSubtreeHeight() + 1
         if self.hasRightChild():
-            balanceFactor += self.getRightChild().getSubtreeSize()
-        return balanceFactor
+            rightSide = self.getRightChild().getSubtreeHeight() + 1
+        return leftSide - rightSide
 
 
 class AVLTree(BinarySearchTree.BinarySearchTree):
@@ -30,120 +31,133 @@ class AVLTree(BinarySearchTree.BinarySearchTree):
                     if currentNode.hasLeftChild():
                         currentNode = currentNode.getLeftChild()
                     else:
-                        currentNode.leftChild = AVLNode(key,value,None,None,currentNode)
+                        currentNode.left = AVLNode(key, value, None, None, currentNode)
                         done = True
                 elif currentNode.key < key:
                     if currentNode.hasRightChild():
                         currentNode = currentNode.getRightChild()
                     else:
-                        currentNode.rightChild = AVLNode(key,value,None,None,currentNode)
+                        currentNode.right = AVLNode(key, value, None, None, currentNode)
                         done = True
             self.count += 1
-            self.checkBalance(currentNode)
+            self.rebalance(currentNode)
 
     def remove(self, key):
-        nodeToRemove = self.get(key)
-        if nodeToRemove:
+        currentNode = self.get(key)
+        if currentNode:
+            rebalancerNode = None
+
             # If it has no children
-            if nodeToRemove.isLeaf():
-                if nodeToRemove.isRoot():
+            if currentNode.isLeaf():
+                if currentNode.isRoot():
                     self.root = None
-                elif nodeToRemove == nodeToRemove.parent.getLeftChild():
-                    nodeToRemove.parent.leftChild = None
                 else:
-                    nodeToRemove.parent.rightChild = None
+                    rebalancerNode = currentNode.getParent()
+                    if currentNode == currentNode.parent.getLeftChild():
+                        currentNode.getParent().left = None
+                    else:
+                        currentNode.getParent().right = None
 
             # If it has both children
-            elif nodeToRemove.hasBothChildren():
-                successorNode = self.getSuccessor(nodeToRemove)
+            elif currentNode.hasBothChildren():
+                successorNode = self.getSuccessor(currentNode)
+                rebalancerNode = successorNode.getParent()
                 tempKey = successorNode.key
                 tempValue = successorNode.value
                 self.remove(successorNode.key) # must clear it before changing the BST path
-                nodeToRemove.key = tempKey
-                nodeToRemove.value = tempValue
+                currentNode.key = tempKey
+                currentNode.value = tempValue
 
             # If it has only one child
             else:
-                if nodeToRemove.hasLeftChild():
-                    leftNode = nodeToRemove.getLeftChild()
-                    if nodeToRemove == self.root:
+                if currentNode.hasLeftChild():
+                    leftNode = currentNode.getLeftChild()
+                    rebalancerNode = leftNode
+                    if currentNode == self.root:
                         leftNode.parent = None
                         self.root = leftNode
                     else:
-                        if nodeToRemove.isLeftChild():
-                            nodeToRemove.parent.leftChild = leftNode
-                        elif nodeToRemove.isRightChild():
-                            nodeToRemove.parent.rightChild = leftNode
-                        leftNode.parent = nodeToRemove.parent
+                        if currentNode.isLeftChild():
+                            currentNode.parent.left = leftNode
+                        elif currentNode.isRightChild():
+                            currentNode.parent.right = leftNode
+                        leftNode.parent = currentNode.parent
                 else:
-                    rightNode = nodeToRemove.getRightChild()
-                    if nodeToRemove == self.root:
+                    rightNode = currentNode.getRightChild()
+                    rebalancerNode = rightNode
+                    if currentNode == self.root:
                         rightNode.parent = None
                         self.root = rightNode
                     else:
-                        if nodeToRemove.isLeftChild():
-                            nodeToRemove.parent.leftChild = rightNode
-                        elif nodeToRemove.isRightChild():
-                            nodeToRemove.parent.rightChild = rightNode
-                        rightNode.parent = nodeToRemove.parent
+                        if currentNode.isLeftChild():
+                            currentNode.parent.left = rightNode
+                        elif currentNode.isRightChild():
+                            currentNode.parent.right = rightNode
+                        rightNode.parent = currentNode.parent
             self.count -= 1
-            self.checkBalance(self.getMax())
+            if rebalancerNode:
+                self.rebalance(rebalancerNode)
 
-    def checkBalance(self, node):
+    def checkBalanceTopDown(self, node):
         if node:
             if abs(node.getBalanceFactor()) > 1:
                 self.rebalance(node)
-            else:
-                self.checkBalance(node.getParent())
+            elif node.hasAnyChildren():
+                self.checkBalanceTopDown(node.getLeftChild())
+                self.checkBalanceTopDown(node.getRightChild())
 
     def rebalance(self, node):
         #self.visualizeVertical()
-        # unbalanced towards right
-        if node.getBalanceFactor() > 1:
-            if node.hasLeftChild() and node.getLeftChild().getBalanceFactor() < 0:
-                self.rotateRight(node.getLeftChild())
-            self.rotateLeft(node)
+        while node is not None:
+            # it's right-heavy
+            if node.getBalanceFactor() < -1:
+                if node.hasRightChild() and node.getRightChild().getBalanceFactor() > 0:
+                    self.rotateRight(node.getRightChild())
+                self.rotateLeft(node)
 
-        # unbalanced towards left
-        if node.getBalanceFactor() < -1:
-            if node.hasRightChild() and node.getRightChild().getBalanceFactor() > 0:
-                self.rotateLeft(node.getRightChild())
-            self.rotateRight(node)
+            # it's left-heavy
+            elif node.getBalanceFactor() > 1:
+                if node.hasLeftChild() and node.getLeftChild().getBalanceFactor() < 0:
+                    self.rotateLeft(node.getLeftChild())
+                self.rotateRight(node)
+            node = node.getParent()
 
     def rotateRight(self, node):
-        oldParent = node
-        newParent = node.getLeftChild()
+        oldNode = node
+        newNode = node.getLeftChild()
 
-        newParent.parent = oldParent.getParent()
-        if oldParent.getParent():
-            if oldParent.isLeftChild():
-                newParent.getParent().leftChild = newParent
+        newNode.parent = oldNode.getParent()
+        if oldNode.getParent():
+            if oldNode.isLeftChild():
+                oldNode.getParent().left = newNode
             else:
-                newParent.getParent().rightChild = newParent
+                oldNode.getParent().right = newNode
         else:
-            self.root = newParent
+            self.root = newNode
 
-        oldParent.parent = newParent
-        oldParent.leftChild = newParent.getRightChild()
-        if oldParent.hasLeftChild():
-            oldParent.getLeftChild().parent = oldParent
-        newParent.rightChild = oldParent
+        oldNode.parent = newNode
+        oldNode.left = newNode.getRightChild()
+        if oldNode.hasLeftChild():
+            oldNode.getLeftChild().parent = oldNode
+        newNode.right = oldNode
+        #self.visualizeVertical()
 
     def rotateLeft(self, node):
-        oldParent = node
-        newParent = node.getRightChild()
+        oldNode = node
+        newNode = node.getRightChild()
 
-        newParent.parent = oldParent.getParent()
-        if oldParent.getParent():
-            if oldParent.isLeftChild():
-                newParent.getParent().leftChild = newParent
+        newNode.parent = oldNode.getParent()
+        if newNode.getParent():
+            if oldNode.isLeftChild():
+                oldNode.getParent().left = newNode
             else:
-                newParent.getParent().rightChild = newParent
+                oldNode.getParent().right = newNode
         else:
-            self.root = newParent
+            self.root = newNode
 
-        oldParent.parent = newParent
-        oldParent.rightChild = newParent.getLeftChild()
-        if oldParent.hasRightChild():
-            oldParent.getRightChild().parent = oldParent
-        newParent.leftChild = oldParent
+        oldNode.parent = newNode
+        oldNode.right = newNode.getLeftChild()
+        if oldNode.hasRightChild():
+            oldNode.getRightChild().parent = oldNode
+        newNode.left = oldNode
+        #self.visualizeVertical()

@@ -1,4 +1,5 @@
 import unittest
+import random
 from DataStructures.Trees import AVLTree
 
 
@@ -37,15 +38,16 @@ class TestAVLTree(unittest.TestCase):
         del avlTree[50]
         self.assertEqual(avlTree[50], None)
 
-        # for node in avlTree:
-        #     print(node)
-
-        for i in range(100):
+        for i in range(150):
             avlTree.put(i,None)
 
-        # avlTree.visualizeVertical()
+        for i in range(150):
+            del avlTree[random.randrange(0,150)]
 
-        # print(avlTree)
+        avlTree.visualizeVertical()
+
+        print("height", avlTree.root.getSubtreeHeight())
+        print("balance", avlTree.root.getBalanceFactor())
 
 
 suite = unittest.TestLoader().loadTestsFromTestCase(TestAVLTree)
