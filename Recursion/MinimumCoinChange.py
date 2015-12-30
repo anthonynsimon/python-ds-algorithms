@@ -21,4 +21,4 @@ class MinimumCoinChange(object):
 
 
 minChange = MinimumCoinChange()
-minChange.getMinimumChange(256)
+minChange.getMinimumChange(1117)

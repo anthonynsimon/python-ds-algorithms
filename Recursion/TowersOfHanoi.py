@@ -14,26 +14,26 @@ class HanoiDisk(object):
 class Tower(object):
 
     def __init__(self):
-        self.__stack = Stacks.StackAA()
+        self.stack = Stacks.StackAA()
 
     def addToTop(self, disk):
-        if self.__stack.isEmpty() != True:
-            if disk.size > int(self.__stack.peek()):
+        if self.stack.isEmpty() != True:
+            if disk.size > int(self.stack.peek()):
                 raise "Illegal move!"
                 return
-        self.__stack.push(disk)
+        self.stack.push(disk)
 
     def removeFromTop(self):
-        if self.__stack.isEmpty() != True:
-            return self.__stack.pop()
+        if self.stack.isEmpty() != True:
+            return self.stack.pop()
         else:
             print("Tower is empty.")
 
     def peekTop(self):
-        return int(self.__stack.peek())
+        return int(self.stack.peek())
 
     def __str__(self):
-        return str(self.__stack)
+        return str(self.stack)
 
 class TowersSet(object):
 
@@ -66,7 +66,7 @@ class TowersSet(object):
             self.numberOfMoves += 1
 
     def isSolved(self):
-        if str(self.solution) == str(self.towerC.__stack):
+        if str(self.solution) == str(self.towerC.stack):
             return True
         else:
             return False

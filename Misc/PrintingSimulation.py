@@ -16,13 +16,13 @@ class Printer(object):
         self.__pagesPerMinute = ppm
         self.__timeRemaining = 0
         self.__currentTask = None
-        self.__taskQueue = Queue.QueueAA()
+        self.taskQueue = Queue.QueueAA()
         self.__waitingTimes = []
         self.__jobHistory = {}
         self.__jobID = 1000
 
     def startNextTask(self):
-        self.__currentTask = self.__taskQueue.dequeue()
+        self.__currentTask = self.taskQueue.dequeue()
         if self.__currentTask != None:
             #Task is starting
             print("Job #{0}: Starting new print task...".format(self.__jobID))
@@ -42,7 +42,7 @@ class Printer(object):
             self.startNextTask()
 
     def addPrintTask(self, task):
-        self.__taskQueue.enqueue(task)
+        self.taskQueue.enqueue(task)
 
     def isBusy(self):
         return self.__currentTask != None
@@ -57,7 +57,7 @@ class Printer(object):
         self.__waitingTimes = []
 
     def resetPrintQueue(self):
-        self.__taskQueue.clear()
+        self.taskQueue.clear()
 
 class Simulation(object):
 

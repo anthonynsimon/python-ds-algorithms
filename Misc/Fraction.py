@@ -10,18 +10,18 @@ def greatestCommonDenominator(m, n):
 class fraction:
 
     def __init__(self, top, bottom):
-        self.__number = top
-        self.__denominator = bottom
+        self.number = top
+        self.denominator = bottom
 
     def __str__(self):
-        return "{0}/{1}".format(self.__number, self.__denominator)
+        return "{0}/{1}".format(self.number, self.denominator)
 
     def asDecimal(self):
-        return self.__number / self.__denominator
+        return self.number / self.denominator
 
     def __add__(self, other):
-        number = self.__number * other.denominator + self.__denominator * other.number
-        denominator = self.__denominator * other.denominator
+        number = self.number * other.denominator + self.denominator * other.number
+        denominator = self.denominator * other.denominator
         common = greatestCommonDenominator(number, denominator)
         return fraction(number//common, denominator//common)
 
