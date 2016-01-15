@@ -1,0 +1,10 @@
+Eat NowGoAndDoSport
+GetIngredients PrepareIngredients
+CutVeggetables CookVeggetables
+PrepareIngredients CutVeggetables
+PrepareIngredients PrepareSauce
+PrepareSauce PutSauceAndVeggetablesTogether
+PutSauceAndVeggetablesTogether Serve
+CookVeggetables PutSauceAndVeggetablesTogether
+Serve Eat
+FindWhichIngredients GetIngredients
