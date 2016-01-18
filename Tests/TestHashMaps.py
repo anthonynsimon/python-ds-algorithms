@@ -59,4 +59,4 @@ class TesthashMaps(unittest.TestCase):
 
 
 suite = unittest.TestLoader().loadTestsFromTestCase(TesthashMaps)
-unittest.TextTestRunner(verbosity=2).run(suite)
+unittest.TextTestRunner(verbosity=0).run(suite)

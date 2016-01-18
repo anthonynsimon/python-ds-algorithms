@@ -49,4 +49,4 @@ class TestOrderedList(unittest.TestCase):
 
 
 suite = unittest.TestLoader().loadTestsFromTestCase(TestOrderedList)
-unittest.TextTestRunner(verbosity=2).run(suite)
+unittest.TextTestRunner(verbosity=0).run(suite)

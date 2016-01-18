@@ -16,11 +16,11 @@ class SimpleVertex(object):
         return self.id
 
     def getConnectionWeight(self, neighbor):
-        return self.connectedTo[neighbor]
+        return int(self.connectedTo[neighbor])
 
     def __repr__(self):
-        return self.getID()
-        return "Vertex '{0}' ==> {1}".format(self.getID(), [x.id for x in self.connectedTo])
+        #return self.getID()
+        return "Vertex '{0}' ==> {1}".format(self.getID(), [(x.id, self.getConnectionWeight(x)) for x in self.connectedTo])
 
     def __lt__(self, other):
         return self.distance < other.distance

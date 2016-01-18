@@ -1,6 +1,4 @@
 from DataStructures.Graphs import Vertex
-from DataStructures import Queue
-
 
 class SimpleGraph(object):
 
@@ -30,89 +28,7 @@ class SimpleGraph(object):
     def getVertices(self):
         return list(self.vertices.values())
 
-    def breathFirstSearch(self, start, end):
-        vertices = self.getVertices()
-        if vertices:
-            startVertex = self.getVertex(start)
-            if startVertex is None:
-                return
-            self.__cleanVerticesHelpers()
-
-            queue = Queue.QueueLL()
-            queue.enqueue(startVertex)
-            startVertex.v = "GRAY"
-            while queue.size() > 0:
-                iterationVertex = queue.dequeue()
-                for neighbor in iterationVertex.getConnections():
-                    if neighbor.color == "WHITE":
-                        queue.enqueue(neighbor)
-                        neighbor.color = "GRAY"
-                        neighbor.distance = iterationVertex.distance + 1
-                    if neighbor.getID() == end:
-                        print("BFS: Found vertex '{0}' at a distance of {1} from '{2}'" .format(neighbor.getID(), neighbor.distance, start))
-                        return True
-                iterationVertex.color = "BLACK"
-
-    def depthFirstSearch(self, startVertex, endVertex):
-        vertices = self.getVertices()
-        if vertices:
-            startVertex = self.getVertex(startVertex)
-            if startVertex is None:
-                return
-            self.__cleanVerticesHelpers()
-            return self.__depthFirstSearchWorker(startVertex, endVertex)
-
-    def __depthFirstSearchWorker(self, currentVertex, endVertex):
-        if currentVertex.getID() == endVertex:
-            print("DFS: Found vertex '{0}' at a distance of {1} from start." .format(currentVertex.getID(), currentVertex.distance))
-            return True
-        if currentVertex.getConnections():
-            for neighbor in currentVertex.getConnections():
-                if neighbor.color == "WHITE":
-                    neighbor.color = "GRAY"
-                    neighbor.distance = currentVertex.distance + 1
-                    if self.__depthFirstSearchWorker(neighbor, endVertex):
-                        return True
-        currentVertex.color = "BLACK"
-
-    def dfsTraverse(self):
-        parents = {}
-        for v in self.getVertices():
-            if v not in parents:
-                parents[v] = None
-                self.__dfsTraverseWorker(v, parents)
-        return list(parents.keys())
-
-    def __dfsTraverseWorker(self, startVertex, parents):
-        for v in startVertex.getConnections():
-            if v not in parents:
-                parents[v] = startVertex
-                self.__dfsTraverseWorker(v, parents)
-
-    def topologicalSort(self):
-        reverseOrderQueue = Queue.QueueLL()
-        self.__cleanVerticesHelpers()
-        if self.vertexCount > 0:
-            for v in self.getVertices():
-                if v.color == "WHITE":
-                    self.__topologicalSortHelper(v,reverseOrderQueue)
-
-        items = []
-        while reverseOrderQueue.size() > 0:
-            items.insert(0, reverseOrderQueue.dequeue())
-        print("\nOrder of execution:")
-        print(" -> ".join(x.getID() for x in items))
-        return items
-
-    def __topologicalSortHelper(self, currentVertex, queue):
-        if currentVertex.color == "WHITE":
-            if currentVertex.getConnections():
-                for v in currentVertex.getConnections():
-                    self.__topologicalSortHelper(v, queue)
-            currentVertex.color = "BLACK"
-            queue.enqueue(currentVertex)
-
-    def __cleanVerticesHelpers(self):
+    def cleanVerticesHelpers(self):
         if self.vertexCount > 0:
             for v in self.getVertices():
                 v.color = "WHITE"

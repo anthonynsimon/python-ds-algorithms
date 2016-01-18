@@ -19,12 +19,15 @@ class BinaryHeap(object):
     def deleteMin(self):
         if not self.isEmpty():
             if self.size() == 1:
-                self.__heapList.pop()
+                result = self.__heapList.pop()
                 self.__count -= 1
+                return result
             else:
+                result = self.__heapList[1]
                 self.__heapList[1] = self.__heapList.pop()
                 self.__count -= 1
                 self.percolateDown(1)
+                return result
 
     def isEmpty(self):
         return self.size() == 0
@@ -78,5 +81,8 @@ class BinaryHeap(object):
     def swapContents(self, indexA, indexB, inList):
         inList[indexA], inList[indexB] = inList[indexB], inList[indexA]
 
+    def rebuildHeap(self):
+        self.buildHeap(self.__heapList[1:])
+
     def __repr__(self):
-        return str(self.__heapList)
+        return str(self.__heapList[1:])

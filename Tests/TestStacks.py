@@ -123,4 +123,4 @@ class TestStacks(unittest.TestCase):
 
 
 suite = unittest.TestLoader().loadTestsFromTestCase(TestStacks)
-unittest.TextTestRunner(verbosity=2).run(suite)
+unittest.TextTestRunner(verbosity=0).run(suite)

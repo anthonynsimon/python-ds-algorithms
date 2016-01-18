@@ -51,4 +51,4 @@ class TestSortingAlgorithms(unittest.TestCase):
 
 
 suite = unittest.TestLoader().loadTestsFromTestCase(TestSortingAlgorithms)
-unittest.TextTestRunner(verbosity=2).run(suite)
+unittest.TextTestRunner(verbosity=0).run(suite)
