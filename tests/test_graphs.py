@@ -1,60 +1,60 @@
 import unittest
-from python_ds_algorithms.DataStructures.Graphs import Graph
-from python_ds_algorithms.DataStructures.Graphs import BreadthFirstSearch
-from python_ds_algorithms.DataStructures.Graphs import DepthFirstSearch
-from python_ds_algorithms.DataStructures.Graphs import TopologicalSort
-from python_ds_algorithms.DataStructures.Graphs import Dijkstra
+from lib.data_structures.graphs.simple_graph import SimpleGraph
+from lib.data_structures.graphs.breadth_first_search import BreathFirstSearchGraph
+from lib.data_structures.graphs.depth_first_search import DepthFirstSearchGraph
+from lib.data_structures.graphs.topological_sort import TopologicalGraph
+from lib.data_structures.graphs.dijkstra import DijkstraGraph
 
-class TestGraphs(unittest.TestCase):
+class Testgraphs(unittest.TestCase):
 
-    def buildGraph(self, graph, fileName, undirected):
+    def build_graph(self, graph, fileName, undirected):
         for line in open(fileName):
             elements = line.split()
             if len(elements) == 2:
-                graph.addEdge(elements[0], elements[1], undirected)
+                graph.add_edge(elements[0], elements[1], undirected)
             elif len(elements) == 3:
-                graph.addEdge(elements[0], elements[1], undirected, elements[2])
+                graph.add_edge(elements[0], elements[1], undirected, elements[2])
         return graph
 
-    def testGraphSimple(self):
-        graph = Graph.SimpleGraph()
-        graph = self.buildGraph(graph, "data/airport_routes.txt",True)
+    def test_simple_graph(self):
+        my_graph = SimpleGraph()
+        my_graph = self.build_graph(my_graph, "data/airport_routes.txt", True)
 
-        self.assertEqual (graph.vertexCount, 10)
+        self.assertEqual (my_graph.vertexCount, 10)
 
-        for vert in graph:
+        for vert in my_graph:
             self.assertIsNotNone(vert)
 
-        self.assertEqual(graph.getVertex("hey"), None)
+        self.assertEqual(my_graph.get_vertex("hey"), None)
 
-        print(graph)
+        print(my_graph)
 
     def testBFS(self):
-        graph = BreadthFirstSearch.BFSGraph()
-        graph = self.buildGraph(graph, "data/airport_routes.txt", True)
+        graph = BreathFirstSearchGraph()
+        graph = self.build_graph(graph, "data/airport_routes.txt", True)
 
-        self.assertTrue(graph.breadthFirstSearch("DEN", "LAX"))
-        self.assertIsNone(graph.breadthFirstSearch("Mark", "Steven"))
-        self.assertIsNone(graph.breadthFirstSearch("LAX", "Steven"))
+        self.assertTrue(graph.bfs("DEN", "LAX"))
+        self.assertIsNone(graph.bfs("Mark", "Steven"))
+        self.assertIsNone(graph.bfs("LAX", "Steven"))
 
     def testDFS(self):
-        graph = DepthFirstSearch.DFSGraph()
-        graph = self.buildGraph(graph, "data/airport_routes.txt", True)
+        graph = DepthFirstSearchGraph()
+        graph = self.build_graph(graph, "data/airport_routes.txt", True)
 
-        self.assertTrue(graph.depthFirstSearch("LAX", "DFW"))
-        self.assertIsNone(graph.depthFirstSearch("Mark", "Steven"))
-        self.assertIsNone(graph.depthFirstSearch("LAX", "Steven"))
+        self.assertTrue(graph.dfs("LAX", "DFW"))
+        self.assertIsNone(graph.dfs("Mark", "Steven"))
+        self.assertIsNone(graph.dfs("LAX", "Steven"))
 
-        self.assertEqual(len(graph.dfsTraverse()), graph.vertexCount)
+        self.assertEqual(len(graph.dfs_traverse()), graph.vertexCount)
 
-    def testTopologicalSort(self):
-        graph = TopologicalSort.TopologicalGraph()
-        graph = self.buildGraph(graph, "data/execution_order_graph.txt", False)
-        graph.topologicalSort()
+    def testTopological_sort(self):
+        graph = TopologicalGraph()
+        graph = self.build_graph(graph, "data/execution_order_graph.txt", False)
+        graph.topological_sort()
 
     def testDijkstra(self):
-        graph = Dijkstra.DijkstraGraph()
-        graph = self.buildGraph(graph, "data/dijkstra_graph.txt", True)
+        graph = DijkstraGraph()
+        graph = self.build_graph(graph, "data/dijkstra_graph.txt", True)
         self.assertEqual(graph.dijkstra("z", "v"), ['z', 'y', 'x', 'v'])
         self.assertEqual(graph.dijkstra("u", "z"), ['u', 'x', 'y', 'z'])
         self.assertEqual(graph.dijkstra("w", "x"), ['w', 'y', 'x'])

@@ -1,50 +1,50 @@
 import unittest
 import random
-from python_ds_algorithms.DataStructures.Trees import AVLTree
+from lib.data_structures.trees.avl_tree import AVLTree
 
 
 class TestAVLTree(unittest.TestCase):
 
     def testAVL(self):
-        avlTree = AVLTree.AVLTree()
-        avlTree.put(5, 2)
-        avlTree.put(6, 3)
-        avlTree.put(50, 7)
-        avlTree.put(7, 4)
-        avlTree.put(1, 1)
-        avlTree.put(15, 6)
-        avlTree.put(11, 5)
-        avlTree[0] = 0
+        avl_tree = AVLTree()
+        avl_tree.put(5, 2)
+        avl_tree.put(6, 3)
+        avl_tree.put(50, 7)
+        avl_tree.put(7, 4)
+        avl_tree.put(1, 1)
+        avl_tree.put(15, 6)
+        avl_tree.put(11, 5)
+        avl_tree[0] = 0
 
-        self.assertEqual(avlTree.get(150), None)
-        self.assertEqual(avlTree[0], 0)
-        self.assertEqual(avlTree[5], 2)
-        self.assertEqual(len(avlTree), 8)
-        self.assertEqual(str(avlTree.getMin()), "'0' : 0")
-        self.assertEqual(str(avlTree.getMax()), "'50' : 7")
+        self.assertEqual(avl_tree.get(150), None)
+        self.assertEqual(avl_tree[0], 0)
+        self.assertEqual(avl_tree[5], 2)
+        self.assertEqual(len(avl_tree), 8)
+        self.assertEqual(str(avl_tree.get_min()), "'0' : 0")
+        self.assertEqual(str(avl_tree.get_max()), "'50' : 7")
 
 
-        avlTree.put(60, 10)
-        avlTree.put(70, 12)
-        avlTree.put(65, 11)
-        avlTree.put(55, 8)
-        avlTree.put(57, 9)
-        avlTree.put(59, 9)
-        avlTree.put(-1, 9)
-        avlTree[50] = 768
+        avl_tree.put(60, 10)
+        avl_tree.put(70, 12)
+        avl_tree.put(65, 11)
+        avl_tree.put(55, 8)
+        avl_tree.put(57, 9)
+        avl_tree.put(59, 9)
+        avl_tree.put(-1, 9)
+        avl_tree[50] = 768
 
-        self.assertEqual(avlTree[50], 768)
-        #avlTree.remove(50)
-        del avlTree[50]
-        self.assertEqual(avlTree[50], None)
-
-        for i in range(150):
-            avlTree.put(i,None)
+        self.assertEqual(avl_tree[50], 768)
+        # avlTree.remove(50)
+        del avl_tree[50]
+        self.assertEqual(avl_tree[50], None)
 
         for i in range(150):
-            del avlTree[random.randrange(0,150)]
+            avl_tree.put(i,None)
 
-        avlTree.visualizeVertical()
+        for i in range(150):
+            del avl_tree[random.randrange(0,150)]
 
-        print("height", avlTree.root.getSubtreeHeight())
-        print("balance", avlTree.root.getBalanceFactor())
+        avl_tree.visualize_vertical()
+
+        print("height", avl_tree.root.get_subtree_height())
+        print("balance", avl_tree.root.get_balance_factor())

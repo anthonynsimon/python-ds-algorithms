@@ -1,48 +1,48 @@
-from python_ds_algorithms.DataStructures import OrderedList
+from lib.data_structures.ordered_list import OrderedList
 import unittest
 
 
 class TestOrderedList(unittest.TestCase):
 
     def test(self):
-        oList = OrderedList.OrderedList()
+        ordered_list = OrderedList()
 
-        self.assertTrue(oList.isEmpty())
+        self.assertTrue(ordered_list.is_empty())
 
-        oList.add(7)
-        oList.add(0)
-        oList.add(3)
+        ordered_list.add(7)
+        ordered_list.add(0)
+        ordered_list.add(3)
 
-        self.assertFalse(oList.isEmpty())
-        self.assertEqual(oList.size(), 3)
-        self.assertEqual(str(oList), "[0, 3, 7]")
+        self.assertFalse(ordered_list.is_empty())
+        self.assertEqual(ordered_list.size(), 3)
+        self.assertEqual(str(ordered_list), "[0, 3, 7]")
 
-        oList.add(6)
-        oList.remove(3)
-        oList.add(2)
+        ordered_list.add(6)
+        ordered_list.remove(3)
+        ordered_list.add(2)
 
-        self.assertEqual(str(oList), "[0, 2, 6, 7]")
-        self.assertEqual(oList.size(), 4)
-        self.assertEqual(oList.pop(), 7)
-        self.assertEqual(oList.pop(), 6)
-        self.assertEqual(str(oList), "[0, 2]")
-        self.assertFalse(oList.isEmpty())
+        self.assertEqual(str(ordered_list), "[0, 2, 6, 7]")
+        self.assertEqual(ordered_list.size(), 4)
+        self.assertEqual(ordered_list.pop(), 7)
+        self.assertEqual(ordered_list.pop(), 6)
+        self.assertEqual(str(ordered_list), "[0, 2]")
+        self.assertFalse(ordered_list.is_empty())
 
-        oList.clear()
+        ordered_list.clear()
 
-        self.assertTrue(oList.isEmpty())
-        self.assertEqual(oList.size(), 0)
-        self.assertEqual(str(oList), "[]")
+        self.assertTrue(ordered_list.is_empty())
+        self.assertEqual(ordered_list.size(), 0)
+        self.assertEqual(str(ordered_list), "[]")
 
-        self.assertEqual(oList.pop(), None)
+        self.assertEqual(ordered_list.pop(), None)
 
-        oList.add(6)
+        ordered_list.add(6)
 
-        self.assertEqual(str(oList), "[6]")
-        self.assertEqual(oList.remove(3), None)
-        self.assertTrue(oList.search(6))
-        self.assertFalse(oList.search(77))
+        self.assertEqual(str(ordered_list), "[6]")
+        self.assertEqual(ordered_list.remove(3), None)
+        self.assertTrue(ordered_list.search(6))
+        self.assertFalse(ordered_list.search(77))
 
-        oList.add(2)
+        ordered_list.add(2)
 
-        self.assertEqual(str(oList), "[2, 6]")
+        self.assertEqual(str(ordered_list), "[2, 6]")

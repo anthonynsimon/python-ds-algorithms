@@ -1,10 +1,10 @@
 import unittest
-from python_ds_algorithms.SortAndSearch import BubbleSort
-from python_ds_algorithms.SortAndSearch import SelectionSort
-from python_ds_algorithms.SortAndSearch import InsertionSort
-from python_ds_algorithms.SortAndSearch import ShellSort
-from python_ds_algorithms.SortAndSearch import MergeSort
-from python_ds_algorithms.SortAndSearch import QuickSort
+from lib.sort_search.bubble_sort import BubbleSort
+from lib.sort_search.selection_sort import SelectionSort
+from lib.sort_search.insertion_sort import InsertionSort
+from lib.sort_search.shell_sort import ShellSort
+from lib.sort_search.merge_sort import MergeSort
+from lib.sort_search.quick_sort import QuickSort
 
 
 class TestSortingAlgorithms(unittest.TestCase):
@@ -32,19 +32,19 @@ class TestSortingAlgorithms(unittest.TestCase):
         self.assertEqual(wrongInput, 57)
 
     def testBubbleSort(self):
-        self.runTest(BubbleSort.BubbleSort())
+        self.runTest(BubbleSort())
 
     def testSelectionSort(self):
-        self.runTest(SelectionSort.SelectionSort())
+        self.runTest(SelectionSort())
 
     def testInsertionSort(self):
-        self.runTest(InsertionSort.InsertionSort())
+        self.runTest(InsertionSort())
 
     def testShellSort(self):
-        self.runTest(ShellSort.ShellSort())
+        self.runTest(ShellSort())
 
     def testMergeSort(self):
-        self.runTest(MergeSort.MergeSort())
+        self.runTest(MergeSort())
 
     def testQuickSort(self):
-        self.runTest(QuickSort.QuickSort())
+        self.runTest(QuickSort())

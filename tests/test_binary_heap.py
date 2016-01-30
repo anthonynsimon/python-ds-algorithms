@@ -1,26 +1,26 @@
 import unittest
-from python_ds_algorithms.DataStructures.Trees.BinaryHeap import BinaryHeap
+from lib.data_structures.trees.binary_heap import BinaryHeap
 
 
 class TestBinaryHeap(unittest.TestCase):
 
     def testBinaryHeap(self):
-        binaryHeap = BinaryHeap()
-        self.assertTrue(binaryHeap.isEmpty())
+        heap = BinaryHeap()
+        self.assertTrue(heap.is_empty())
 
-        binaryHeap.insert(1)
-        binaryHeap.insert(4)
-        binaryHeap.insert(5)
-        binaryHeap.insert(3)
-        binaryHeap.insert(2)
-        binaryHeap.insert(6)
-        binaryHeap.deleteMin()
+        heap.insert(1)
+        heap.insert(4)
+        heap.insert(5)
+        heap.insert(3)
+        heap.insert(2)
+        heap.insert(6)
+        heap.delete_min()
 
-        self.assertEqual(binaryHeap.findMin(), 2)
-        self.assertEqual(binaryHeap.size(), 5)
-        self.assertFalse(binaryHeap.isEmpty())
+        self.assertEqual(heap.find_min(), 2)
+        self.assertEqual(heap.size(), 5)
+        self.assertFalse(heap.is_empty())
 
-        binaryHeap.buildHeap([99,77,33,22,55,66,11,44,99])
-        self.assertEqual(binaryHeap.findMin(), 11)
-        self.assertEqual(binaryHeap.size(), 9)
-        self.assertFalse(binaryHeap.isEmpty())
+        heap.build_heap([99, 77, 33, 22, 55, 66, 11, 44, 99])
+        self.assertEqual(heap.find_min(), 11)
+        self.assertEqual(heap.size(), 9)
+        self.assertFalse(heap.is_empty())

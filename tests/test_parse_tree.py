@@ -1,14 +1,14 @@
 import unittest
-from python_ds_algorithms.DataStructures.Trees.ParseTreeExample import ParseTree
+from lib.data_structures.trees.parse_tree import ParseTree
 
 
 class TestParseTree(unittest.TestCase):
 
     def evaluate(self, expression, result):
         parser = ParseTree()
-        parseTree = parser.buildParseTree(expression)
-        self.assertEqual(parser.evaluate(parseTree), result)
-        print(parseTree)
+        parse_tree = parser.build_parse_tree(expression)
+        self.assertEqual(parser.evaluate(parse_tree), result)
+        print(parse_tree)
 
     def testParseTree(self):
         self.evaluate("( ( 5 + ( 2 * ( 100 / 2 ) ) ) - 5 )", 100)

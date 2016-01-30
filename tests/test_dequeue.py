@@ -1,27 +1,27 @@
 import unittest
-from python_ds_algorithms.DataStructures import Deque
+from lib.data_structures.deque import Deque
 
 
 class TestDeque(unittest.TestCase):
 
     def testALDeque(self):
-        deque = Deque.Deque()
-        self.assertTrue(deque.isEmpty())
+        deque = Deque()
+        self.assertTrue(deque.is_empty())
 
-        deque.addTail("Third")
-        deque.addHead("Second")
-        deque.addHead("First")
+        deque.add_tail("Third")
+        deque.add_head("Second")
+        deque.add_head("First")
 
-        self.assertFalse(deque.isEmpty())
-        self.assertEqual(deque.removeTail(), "Third")
-        self.assertEqual(deque.removeTail(), "Second")
-        self.assertEqual(deque.removeHead(), "First")
-        self.assertEqual(deque.removeTail(), None)
-        self.assertEqual(deque.removeHead(), None)
+        self.assertFalse(deque.is_empty())
+        self.assertEqual(deque.remote_tail(), "Third")
+        self.assertEqual(deque.remote_tail(), "Second")
+        self.assertEqual(deque.remove_head(), "First")
+        self.assertEqual(deque.remote_tail(), None)
+        self.assertEqual(deque.remove_head(), None)
 
-        deque.addTail("Third")
-        deque.addHead("Second")
-        deque.addHead("First")
+        deque.add_tail("Third")
+        deque.add_head("Second")
+        deque.add_head("First")
 
         self.assertEqual(deque.size(), 3)
         deque.clear()

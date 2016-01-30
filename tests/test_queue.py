@@ -1,13 +1,13 @@
 import unittest
-from python_ds_algorithms.DataStructures import Queue
+from lib.data_structures.queue import QueueLL, QueueAA
 
 
 class TestQueue(unittest.TestCase):
 
     def testALQueueTest(self):
-        queue = Queue.QueueAA()
+        queue = QueueAA()
         self.assertEqual(queue.size(),0)
-        self.assertTrue(queue.isEmpty())
+        self.assertTrue(queue.is_empty())
         self.assertEqual(queue.dequeue(), None)
 
         queue.enqueue("First")
@@ -15,7 +15,7 @@ class TestQueue(unittest.TestCase):
         queue.enqueue("Third")
 
         self.assertEqual(queue.size(),3)
-        self.assertFalse(queue.isEmpty())
+        self.assertFalse(queue.is_empty())
         self.assertEqual(queue.dequeue(), "First")
         self.assertEqual(queue.dequeue(), 2)
         self.assertEqual(queue.dequeue(), "Third")
@@ -26,12 +26,12 @@ class TestQueue(unittest.TestCase):
         queue.enqueue("Uno")
         queue.enqueue("Dos")
         queue.clear()
-        self.assertEqual(queue.isEmpty(), True)
+        self.assertEqual(queue.is_empty(), True)
 
     def testLLQueueTest(self):
-        queue = Queue.QueueLL()
+        queue = QueueLL()
         self.assertEqual(queue.size(),0)
-        self.assertTrue(queue.isEmpty())
+        self.assertTrue(queue.is_empty())
         self.assertEqual(queue.dequeue(), None)
 
         queue.enqueue("First")
@@ -39,7 +39,7 @@ class TestQueue(unittest.TestCase):
         queue.enqueue("Third")
 
         self.assertEqual(queue.size(),3)
-        self.assertFalse(queue.isEmpty())
+        self.assertFalse(queue.is_empty())
         self.assertEqual(queue.dequeue(), "First")
         self.assertEqual(queue.dequeue(), 2)
         self.assertEqual(queue.dequeue(), "Third")
@@ -50,4 +50,4 @@ class TestQueue(unittest.TestCase):
         queue.enqueue("Uno")
         queue.enqueue("Dos")
         queue.clear()
-        self.assertEqual(queue.isEmpty(), True)
+        self.assertEqual(queue.is_empty(), True)
