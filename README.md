@@ -1,2 +1,2 @@
-# python-data-structures-algorithms
-Implementing common Algorithms and Data Structures to brush up on Python
+# Common Data Structures and Algorithms in Python
+Trying out Python by implementing some common Data Structures and Algorithms
