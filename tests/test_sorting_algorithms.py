@@ -1,10 +1,10 @@
 import unittest
-from SortAndSearch import BubbleSort
-from SortAndSearch import SelectionSort
-from SortAndSearch import InsertionSort
-from SortAndSearch import ShellSort
-from SortAndSearch import MergeSort
-from SortAndSearch import QuickSort
+from python_ds_algorithms.SortAndSearch import BubbleSort
+from python_ds_algorithms.SortAndSearch import SelectionSort
+from python_ds_algorithms.SortAndSearch import InsertionSort
+from python_ds_algorithms.SortAndSearch import ShellSort
+from python_ds_algorithms.SortAndSearch import MergeSort
+from python_ds_algorithms.SortAndSearch import QuickSort
 
 
 class TestSortingAlgorithms(unittest.TestCase):

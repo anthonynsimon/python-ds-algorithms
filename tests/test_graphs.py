@@ -1,9 +1,9 @@
 import unittest
-from DataStructures.Graphs import Graph
-from DataStructures.Graphs import BreadthFirstSearch
-from DataStructures.Graphs import DepthFirstSearch
-from DataStructures.Graphs import TopologicalSort
-from DataStructures.Graphs import Dijkstra
+from python_ds_algorithms.DataStructures.Graphs import Graph
+from python_ds_algorithms.DataStructures.Graphs import BreadthFirstSearch
+from python_ds_algorithms.DataStructures.Graphs import DepthFirstSearch
+from python_ds_algorithms.DataStructures.Graphs import TopologicalSort
+from python_ds_algorithms.DataStructures.Graphs import Dijkstra
 
 class TestGraphs(unittest.TestCase):
 

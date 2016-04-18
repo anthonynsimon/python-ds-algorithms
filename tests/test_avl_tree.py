@@ -1,6 +1,6 @@
 import unittest
 import random
-from DataStructures.Trees import AVLTree
+from python_ds_algorithms.DataStructures.Trees import AVLTree
 
 
 class TestAVLTree(unittest.TestCase):

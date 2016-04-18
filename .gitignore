@@ -4,6 +4,8 @@
 # Unnecessary files and folders
 __pycache__
 .DS_Store
+.ropeproject
+.cache
 
 # Compiled python modules.
 .pyc

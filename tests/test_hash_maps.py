@@ -1,6 +1,6 @@
 import unittest
-from DataStructures import HashMapSimple
-from DataStructures import HashMapAlternate
+from python_ds_algorithms.DataStructures import HashMapSimple
+from python_ds_algorithms.DataStructures import HashMapAlternate
 
 
 class TesthashMaps(unittest.TestCase):

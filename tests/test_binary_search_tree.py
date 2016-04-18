@@ -1,6 +1,6 @@
 import unittest
 import random
-from DataStructures.Trees import BinarySearchTree
+from python_ds_algorithms.DataStructures.Trees import BinarySearchTree
 
 
 class TestBinarySearchTree(unittest.TestCase):

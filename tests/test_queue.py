@@ -1,5 +1,5 @@
 import unittest
-from DataStructures import Queue
+from python_ds_algorithms.DataStructures import Queue
 
 
 class TestQueue(unittest.TestCase):

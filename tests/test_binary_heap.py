@@ -1,5 +1,5 @@
 import unittest
-from DataStructures.Trees.BinaryHeap import BinaryHeap
+from python_ds_algorithms.DataStructures.Trees.BinaryHeap import BinaryHeap
 
 
 class TestBinaryHeap(unittest.TestCase):

@@ -1,5 +1,5 @@
 import unittest
-from DataStructures import Stacks
+from python_ds_algorithms.DataStructures import Stacks
 
 
 class TestStacks(unittest.TestCase):

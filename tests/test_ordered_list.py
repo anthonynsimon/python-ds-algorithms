@@ -1,4 +1,4 @@
-from DataStructures import OrderedList
+from python_ds_algorithms.DataStructures import OrderedList
 import unittest
 
 
