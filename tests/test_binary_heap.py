@@ -24,7 +24,3 @@ class TestBinaryHeap(unittest.TestCase):
         self.assertEqual(binaryHeap.findMin(), 11)
         self.assertEqual(binaryHeap.size(), 9)
         self.assertFalse(binaryHeap.isEmpty())
-
-
-suite = unittest.TestLoader().loadTestsFromTestCase(TestBinaryHeap)
-unittest.TextTestRunner(verbosity=0).run(suite)

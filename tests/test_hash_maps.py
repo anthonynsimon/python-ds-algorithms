@@ -56,7 +56,3 @@ class TesthashMaps(unittest.TestCase):
         self.assertEqual(hashMap.get("Michigan"), "MI")
         self.assertFalse(hashMap.get("NY"))
         self.assertFalse(hashMap.get("New York"))
-
-
-suite = unittest.TestLoader().loadTestsFromTestCase(TesthashMaps)
-unittest.TextTestRunner(verbosity=0).run(suite)

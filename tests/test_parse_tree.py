@@ -17,7 +17,3 @@ class TestParseTree(unittest.TestCase):
         self.evaluate("( 5 * ( 5 * ( 5 * 5 ) ) ) )", 625)
         self.evaluate("( 10 / ( 5 + ( 3 + 2 ) ) )", 1)
         self.evaluate("( 1 + ( 10 - ( 5 + ( 3 + 2 ) ) ) )", 1)
-
-
-suite = unittest.TestLoader().loadTestsFromTestCase(TestParseTree)
-unittest.TextTestRunner(verbosity=0).run(suite)

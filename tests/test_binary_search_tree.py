@@ -43,8 +43,4 @@ class TestBinarySearchTree(unittest.TestCase):
 
         bstTree.visualizeVertical()
 
-        print("height", bstTree.root.getSubtreeHeight())
-
-
-suite = unittest.TestLoader().loadTestsFromTestCase(TestBinarySearchTree)
-unittest.TextTestRunner(verbosity=0).run(suite)
+        # print("height", bstTree.root.getSubtreeHeight())

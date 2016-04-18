@@ -18,7 +18,7 @@ class TestGraphs(unittest.TestCase):
 
     def testGraphSimple(self):
         graph = Graph.SimpleGraph()
-        graph = self.buildGraph(graph, "AirportRoutes.txt",True)
+        graph = self.buildGraph(graph, "data/airport_routes.txt",True)
 
         self.assertEqual (graph.vertexCount, 10)
 
@@ -31,7 +31,7 @@ class TestGraphs(unittest.TestCase):
 
     def testBFS(self):
         graph = BreadthFirstSearch.BFSGraph()
-        graph = self.buildGraph(graph, "AirportRoutes.txt", True)
+        graph = self.buildGraph(graph, "data/airport_routes.txt", True)
 
         self.assertTrue(graph.breadthFirstSearch("DEN", "LAX"))
         self.assertIsNone(graph.breadthFirstSearch("Mark", "Steven"))
@@ -39,7 +39,7 @@ class TestGraphs(unittest.TestCase):
 
     def testDFS(self):
         graph = DepthFirstSearch.DFSGraph()
-        graph = self.buildGraph(graph, "AirportRoutes.txt", True)
+        graph = self.buildGraph(graph, "data/airport_routes.txt", True)
 
         self.assertTrue(graph.depthFirstSearch("LAX", "DFW"))
         self.assertIsNone(graph.depthFirstSearch("Mark", "Steven"))
@@ -49,16 +49,14 @@ class TestGraphs(unittest.TestCase):
 
     def testTopologicalSort(self):
         graph = TopologicalSort.TopologicalGraph()
-        graph = self.buildGraph(graph, "ExecutionOrderGraph.txt", False)
+        graph = self.buildGraph(graph, "data/execution_order_graph.txt", False)
         graph.topologicalSort()
 
     def testDijkstra(self):
         graph = Dijkstra.DijkstraGraph()
-        graph = self.buildGraph(graph, "GraphForDijkstra.txt", True)
+        graph = self.buildGraph(graph, "data/dijkstra_graph.txt", True)
         self.assertEqual(graph.dijkstra("z", "v"), ['z', 'y', 'x', 'v'])
         self.assertEqual(graph.dijkstra("u", "z"), ['u', 'x', 'y', 'z'])
         self.assertEqual(graph.dijkstra("w", "x"), ['w', 'y', 'x'])
 
 
-suite = unittest.TestLoader().loadTestsFromTestCase(TestGraphs)
-unittest.TextTestRunner(verbosity=0).run(suite)

@@ -1,8 +1,17 @@
-# Idea files
+# IDE files
 .idea
 
-# Unnecessary files
+# Unnecessary files and folders
 __pycache__
 .DS_Store
+
+# Compiled python modules.
 .pyc
 *.pyc
+
+# Setuptools distribution folder.
+/dist/
+
+# Python egg metadata, regenerated from source files by setuptools.
+/*.egg-info
+.eggs
