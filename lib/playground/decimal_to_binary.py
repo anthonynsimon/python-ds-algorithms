@@ -1,9 +1,9 @@
-from lib.data_structures import stack
+from lib.data_structures.stack import StackAA
 
 
 def convert_base(decimal, base):
     digits = "0123456789ABCDEF"
-    stack = Stacks.StackAA()
+    stack = StackAA()
     number = decimal
     while number > 0:
         rem = number % base
@@ -15,6 +15,7 @@ def convert_base(decimal, base):
         items.append(digits[stack.pop()])
     return "".join(items)
 
+
 def binary_to_decimal(binary):
     binary = str(binary)
     result = 0
@@ -24,6 +25,7 @@ def binary_to_decimal(binary):
             result += power_of((len(binary) - (position + 1)))
         position += 1
     return result
+
 
 def power_of(n):
     result = 1

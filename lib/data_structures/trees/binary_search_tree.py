@@ -68,7 +68,6 @@ class BSTNode(object):
         return max(left, right)
 
     def __repr__(self):
-        #return "{0}".format(self.key)
         return "'{0}' : {1}".format(self.key,self.value)
 
     def __iter__(self):

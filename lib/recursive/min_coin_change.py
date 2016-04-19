@@ -5,20 +5,20 @@ class MinimumCoinChange(object):
     def __init__(self):
         self.__coins = ["200", "100", "50", "20", "10", "5", "2", "1"]
 
-    def getMinimumChange(self, amount):
-        print(self.getMinimumChangeWorker(amount, self.__coins))
+    def get_min_change(self, amount):
+        print(self.get_min_change_helper(amount, self.__coins))
 
-    def getMinimumChangeWorker(self, amount, coins):
-        currentMax = int(coins[0])
-        currentAmount = amount
+    def get_min_change_helper(self, amount, coins):
+        max = int(coins[0])
+        current = amount
 
-        if amount % currentMax == 0:
-            return "{1} coins of {0} cents\n" .format(currentMax, (amount // currentMax))
+        if amount % max == 0:
+            return "{1} coins of {0} cents\n" .format(max, (amount // max))
 
-        if amount // currentMax > 0:
-            amount -= currentMax * (amount // currentMax)
-        return "{1} coins of {0} cents\n".format(currentMax, (currentAmount // currentMax)) + self.getMinimumChangeWorker(amount, coins[1:])
+        if amount // max > 0:
+            amount -= max * (amount // max)
+        return "{1} coins of {0} cents\n".format(max, (current // max)) + self.get_min_change_helper(amount, coins[1:])
 
 
 minChange = MinimumCoinChange()
-minChange.getMinimumChange(1117)
+minChange.get_min_change(1117)

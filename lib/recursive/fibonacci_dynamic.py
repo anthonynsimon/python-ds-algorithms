@@ -5,13 +5,13 @@ class Fibonacci(object):
         self.__cache[0] = 1
         self.__cache[1] = 1
 
-    def naiveFibonacci(self, n):
+    def naive_fibonacci(self, n):
         if n == 0 or n == 1:
             return 1
 
-        return self.naiveFibonacci(n-1) + self.naiveFibonacci(n-2)
+        return self.naive_fibonacci(n - 1) + self.naive_fibonacci(n - 2)
 
-    def bottomUpFibonacci(self, n):
+    def bottom_up(self, n):
         for i in range(2, n + 1):
             self.__cache[i] = self.__cache[i - 1] + self.__cache[i - 2]
         return self.__cache[n]
@@ -19,5 +19,5 @@ class Fibonacci(object):
 
 fib = Fibonacci()
 for i in range(200):
-     #print(fib.naiveFibonacci(i))
-     print(fib.bottomUpFibonacci(i))
+     # print(fib.naive_fibonacci(i))
+     print(fib.bottom_up(i))

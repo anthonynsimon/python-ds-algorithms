@@ -11,20 +11,21 @@ def main():
     t.forward(200)
     t.left(30)
     t.down()
-    drawSierpinskiTriangle(t,450)
+    draw(t, 450)
     window.exitonclick()
 
-def drawSierpinskiTriangle(t, distance):
+
+def draw(t, distance):
     if distance > 10:
         t.left(120)
         t.forward(distance)
-        drawSierpinskiTriangle(t,distance//2)
+        draw(t, distance // 2)
         t.left(120)
         t.forward(distance)
-        drawSierpinskiTriangle(t,distance//2)
+        draw(t, distance // 2)
         t.left(120)
         t.forward(distance)
-        drawSierpinskiTriangle(t,distance//2)
+        draw(t, distance // 2)
 
 
 main()

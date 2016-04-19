@@ -46,14 +46,14 @@ class AVLTree(BinarySearchTree):
     def remove(self, key):
         current_node = self.get(key)
         if current_node:
-            rebalance_node = None
+            unbalanced_node = None
 
             # If it has no children
             if current_node.is_leaf():
                 if current_node.is_root():
                     self.root = None
                 else:
-                    rebalance_node = current_node.get_parent()
+                    unbalanced_node = current_node.get_parent()
                     if current_node == current_node.parent.get_left_child():
                         current_node.get_parent().left = None
                     else:
@@ -62,7 +62,7 @@ class AVLTree(BinarySearchTree):
             # If it has both children
             elif current_node.has_both_children():
                 successor_node = self.get_successor(current_node)
-                rebalance_node = successor_node.get_parent()
+                unbalanced_node = successor_node.get_parent()
                 temp_key = successor_node.key
                 temp_value = successor_node.value
                 self.remove(successor_node.key) # must clear it before changing the BST path
@@ -73,7 +73,7 @@ class AVLTree(BinarySearchTree):
             else:
                 if current_node.has_left_child():
                     left_node = current_node.get_left_child()
-                    rebalance_node = left_node
+                    unbalanced_node = left_node
                     if current_node == self.root:
                         left_node.parent = None
                         self.root = left_node
@@ -85,7 +85,7 @@ class AVLTree(BinarySearchTree):
                         left_node.parent = current_node.parent
                 else:
                     right_node = current_node.get_right_child()
-                    rebalance_node = right_node
+                    unbalanced_node = right_node
                     if current_node == self.root:
                         right_node.parent = None
                         self.root = right_node
@@ -96,8 +96,8 @@ class AVLTree(BinarySearchTree):
                             current_node.parent.right = right_node
                         right_node.parent = current_node.parent
             self.count -= 1
-            if rebalance_node:
-                self.rebalance(rebalance_node)
+            if unbalanced_node:
+                self.rebalance(unbalanced_node)
 
     def check_balance_top_down(self, node):
         if node:

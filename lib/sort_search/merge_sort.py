@@ -1,21 +1,18 @@
-# TODO:
-# Write an iterative solution
-
 class MergeSort(object):
 
-    def sort(self, listToSort):
-        if type(listToSort) is not list or len(listToSort) < 1:
+    def sort(self, data):
+        if type(data) is not list or len(data) < 1:
             return
 
-        listToSort[:] = self.sortWorker(listToSort)
+        data[:] = self.__sort_helper(data)
 
-    def sortWorker(self, list,):
+    def __sort_helper(self, list, ):
         if len(list) == 1:
             return list
 
         middle = len(list)//2
-        left = self.sortWorker(list[0:middle])
-        right = self.sortWorker(list[middle:len(list)])
+        left = self.__sort_helper(list[0:middle])
+        right = self.__sort_helper(list[middle:len(list)])
 
         return self.merge(left, right)
 
@@ -27,9 +24,3 @@ class MergeSort(object):
         if left[0] < right[0]:
             return [left[0]] + self.merge(left[1:len(left)], right)
         return [right[0]] + self.merge(right[1:len(right)], left)
-
-
-# numbers = [14,17,15,6,4,0,19,7,13,12,20,10,2,5,1,11,18,16,3,9,8]
-# mergeSort = MergeSort()
-# mergeSort.sort(numbers)
-# print("result =", numbers)

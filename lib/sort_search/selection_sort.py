@@ -1,16 +1,16 @@
 class SelectionSort(object):
 
-    def sort(self, listToSort):
-        if type(listToSort) is not list or len(listToSort) < 1:
+    def sort(self, data):
+        if type(data) is not list or len(data) < 1:
             return
 
-        for iteration in range(len(listToSort)):
-            indexForMax = 0
-            iterationLength = len(listToSort) - iteration
-            for position in range(iterationLength):
-                if listToSort[position] > listToSort[indexForMax]:
-                    indexForMax = position
-            self.swapContents(iterationLength-1, indexForMax, listToSort)
+        for iteration in range(len(data)):
+            index_max = 0 # Index for the max value
+            iter_length = len(data) - iteration
+            for position in range(iter_length):
+                if data[position] > data[index_max]:
+                    index_max = position
+            self.__swap_contents(iter_length - 1, index_max, data)
 
-    def swapContents(self, indexA, indexB, list):
-        list[indexA], list[indexB] = list[indexB], list[indexA]
+    def __swap_contents(self, a, b, data):
+        data[a], data[b] = data[b], data[a]

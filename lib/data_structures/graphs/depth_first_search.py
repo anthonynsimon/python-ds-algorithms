@@ -26,7 +26,7 @@ class DepthFirstSearchGraph(SimpleGraph):
         current.color = "BLACK"
 
     def dfs_traverse(self):
-        if self.vertexCount <= 0:
+        if self.vertex_count <= 0:
             return
         parents = {}
         for v in self.get_vertices():

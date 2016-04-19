@@ -13,7 +13,7 @@ class BreathFirstSearchGraph(SimpleGraph):
 
         queue = QueueLL()
         queue.enqueue(start_vertex)
-        start_vertex.v = "GRAY"
+        start_vertex.color = "GRAY"
         while queue.size() > 0:
             iteration_vertex = queue.dequeue()
             for neighbor in iteration_vertex.get_connections():

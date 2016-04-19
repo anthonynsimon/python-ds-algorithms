@@ -19,7 +19,6 @@ class SimpleVertex(object):
         return int(self.connections[neighbor])
 
     def __repr__(self):
-        #return self.getID()
         return "vertex '{0}' ==> {1}".format(self.get_id(), [(x.id, self.get_connection_weight(x)) for x in self.connections])
 
     def __lt__(self, other):

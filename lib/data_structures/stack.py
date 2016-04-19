@@ -1,9 +1,9 @@
 class StackLLNode(object):
     
 
-    def __init__(self, data, nextNode):
+    def __init__(self, data, next):
         self.data = data
-        self.next = nextNode
+        self.next = next
 
 
 # Linked list based Stack
@@ -30,12 +30,12 @@ class StackLL(object):
             return holder
 
     def push(self, data):
-        newNode = StackLLNode(data, None)
+        new_node = StackLLNode(data, None)
         if self.is_empty():
-            self.__top = newNode
+            self.__top = new_node
         else:
-            newNode.next = self.__top
-            self.__top = newNode
+            new_node.next = self.__top
+            self.__top = new_node
 
         self.__count += 1
 

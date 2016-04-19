@@ -6,9 +6,9 @@
 class HashMapSimple(object):
 
     def __init__(self):
-        self.__sizeOfTable = 64
-        self.__slots = [None] * self.__sizeOfTable
-        self.__data = [None] * self.__sizeOfTable
+        self.__table_size = 64
+        self.__slots = [None] * self.__table_size
+        self.__data = [None] * self.__table_size
 
     def hash(self, key):
         if type(key) is str:
@@ -17,38 +17,38 @@ class HashMapSimple(object):
             for ch in key:
                 sum += ord(ch) * position
             key = sum
-        return key % self.__sizeOfTable
+        return key % self.__table_size
 
-    def rehash(self, oldHash):
-        return (oldHash + 1) % self.__sizeOfTable
+    def rehash(self, old_hash):
+        return (old_hash + 1) % self.__table_size
 
     def put(self, key, value):
-        hashValue = self.hash(key)
+        hash_value = self.hash(key)
         done = False
-        for i in range(self.__sizeOfTable):
-            if self.__slots[hashValue] == None:
-                self.__slots[hashValue] = key
-                self.__data[hashValue] = value
+        for i in range(self.__table_size):
+            if self.__slots[hash_value] == None:
+                self.__slots[hash_value] = key
+                self.__data[hash_value] = value
                 done = True
                 break
-            elif self.__slots[hashValue] == key:
-                self.__data[hashValue] = value
+            elif self.__slots[hash_value] == key:
+                self.__data[hash_value] = value
                 done = True
                 break
             else:
-                hashValue = self.rehash(hashValue)
+                hash_value = self.rehash(hash_value)
 
     def get(self, key):
-        hashValue = self.hash(key)
+        hash_value = self.hash(key)
         found = False
-        for i in range(self.__sizeOfTable):
-            if self.__slots[hashValue] == key:
+        for i in range(self.__table_size):
+            if self.__slots[hash_value] == key:
                 found = True
                 break
             else:
-                hashValue = self.rehash(hashValue)
+                hash_value = self.rehash(hash_value)
 
         if found:
-            return self.__data[hashValue]
+            return self.__data[hash_value]
         else:
             return False

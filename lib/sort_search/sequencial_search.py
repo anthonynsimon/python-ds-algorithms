@@ -1,14 +1,14 @@
 class SequentialSearch(object):
 
-    def containsValue(self, value, list):
-        if len(list) == 0:
+    def contains_value(self, value, data):
+        if len(data) == 0:
             return False
 
         found = False
         steps = 0
-        for i in range(len(list)):
+        for i in range(len(data)):
             steps += 1
-            if list[i] == value:
+            if data[i] == value:
                 found = True
                 break
 
@@ -19,22 +19,22 @@ class SequentialSearch(object):
             result = "List doesn't contain value. Took {0} steps.".format(steps)
         return result
 
-    def containsValueOrderedList(self, value, list):
-        size = len(list)
+    def contains_value_ordered_list(self, value, data):
+        size = len(data)
         if size == 0:
             return False
 
         found = False
         steps = 0
-        if value <= list[size-1]:
+        if value <= data[size-1]:
             starting = 0
 
-            if value > list[size//2]:
+            if value > data[size//2]:
                 starting = size//2
 
             for i in range(starting, size):
                 steps += 1
-                if list[i] == value:
+                if data[i] == value:
                     found = True
                     break
 
@@ -51,6 +51,6 @@ for i in range(10000000):
     numbers.append(i)
 
 search = SequentialSearch()
-print(search.containsValue(924681,numbers))
+print(search.contains_value(924681, numbers))
 numbers.sort()
-print(search.containsValueOrderedList(924681,numbers))
+print(search.contains_value_ordered_list(924681, numbers))

@@ -1,17 +1,18 @@
 def fizz_buzz(n):
-    n = 1
+    i = 1
     items = []
-    while (n <= n):
-        if (n % 3 == 0 and n % 5 == 0):
+    while i <= n:
+        if i % 3 == 0 and i % 5 == 0:
             items.append("FizzBuzz")
-        elif (n % 3 == 0):
+        elif i % 3 == 0:
             items.append("Fizz")
-        elif (n % 5 == 0):
+        elif i % 5 == 0:
             items.append("Buzz")
         else:
-            items.append(str(n))
-        n += 1
+            items.append(str(i))
+        i += 1
     print(" ".join(items))
+
 
 def fizz_buzz_alternate():
     items = []

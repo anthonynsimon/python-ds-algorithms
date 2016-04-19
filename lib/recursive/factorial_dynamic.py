@@ -5,12 +5,12 @@ class Factorial(object):
         self.cache[0] = 1
         self.cache[1] = 1
 
-    def naiveFactorial(self, n):
+    def naive_factorial(self, n):
         if n <= 1:
             return 1
-        return (n * self.naiveFactorial(n-1))
+        return n * self.naive_factorial(n - 1)
 
-    def topDown(self, n):
+    def top_down(self, n):
         if self.cache.get(n):
             return self.cache[n]
 
@@ -21,6 +21,6 @@ class Factorial(object):
 
 fact = Factorial()
 for i in range(1000):
-    fact.topDown(i)
+    fact.top_down(i)
 for element in fact.cache:
     print("{0}! = {1}" .format(element, fact.cache[element]))

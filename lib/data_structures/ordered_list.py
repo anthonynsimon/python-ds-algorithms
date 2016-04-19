@@ -1,11 +1,10 @@
 class OrderedListNode(object):
-
-    def __init__(self, initData):
-        self.data = initData
+    def __init__(self, data):
+        self.data = data
         self.next = None
 
-class OrderedList(object):
 
+class OrderedList(object):
     def __init__(self):
         self.__head = None
         self.__count = 0
@@ -17,7 +16,7 @@ class OrderedList(object):
             current = self.__head
             previous = None
             done = False
-            newNode = OrderedListNode(item)
+            new_node = OrderedListNode(item)
             while not done:
                 if current is None:
                     done = True
@@ -29,25 +28,25 @@ class OrderedList(object):
                         current = current.next
 
             if previous is None:
-                newNode.next = self.__head
-                self.__head = newNode
+                new_node.next = self.__head
+                self.__head = new_node
             else:
-                previous.next = newNode
-                newNode.next = current
+                previous.next = new_node
+                new_node.next = current
         self.__count += 1
 
     def remove(self, item):
         done = False
         current = self.__head
         previous = None
-        while done == False:
-            if current == None:
-                print("Couldn't find item '{0}'" .format(item))
+        while not done:
+            if current is None:
+                print("Couldn't find item '{0}'".format(item))
                 done = True
             else:
                 if item == current.data:
                     self.__count -= 1
-                    if previous == None:
+                    if previous is None:
                         self.__head = current.next
                     else:
                         previous.next = current.next
@@ -55,7 +54,6 @@ class OrderedList(object):
                 else:
                     previous = current
                     current = current.next
-
 
     def search(self, item):
         found = False
@@ -81,7 +79,7 @@ class OrderedList(object):
             return
 
         if self.size() == 1:
-            temp  = self.__head.data
+            temp = self.__head.data
             self.__head = None
             self.__count -= 1
             return temp

@@ -8,7 +8,8 @@ def gcd(m, n):
         n = old_m % old_n
     return n
 
-class fraction:
+
+class Fraction:
 
     def __init__(self, top, bottom):
         self.number = top
@@ -24,10 +25,10 @@ class fraction:
         number = self.number * other.denominator + self.denominator * other.number
         denominator = self.denominator * other.denominator
         common = gcd(number, denominator)
-        return fraction(number // common, denominator // common)
+        return Fraction(number // common, denominator // common)
 
 
-my_fraction = fraction(1, 2)
-new_fraction = my_fraction + fraction(1, 2)
+my_fraction = Fraction(1, 2)
+new_fraction = my_fraction + Fraction(1, 2)
 print("{0} as decimal is {1}".format(my_fraction, my_fraction.to_decimal()))
 print("{0} as decimal is {1}".format(new_fraction, new_fraction.to_decimal()))

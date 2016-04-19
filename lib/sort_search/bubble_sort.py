@@ -1,17 +1,17 @@
 class BubbleSort(object):
 
-    def sort(self, listToSort):
-        if type(listToSort) is not list or len(listToSort) < 1:
+    def sort(self, data):
+        if type(data) is not list or len(data) < 1:
             return
 
         done = False
         while not done:
             exchanges = 0
-            for i in range(len(listToSort)-1):
-                if listToSort[i] > listToSort[i+1]:
-                    temp = listToSort[i]
-                    listToSort[i] = listToSort[i + 1]
-                    listToSort[i + 1] = temp
+            for i in range(len(data)-1):
+                if data[i] > data[i+1]:
+                    temp = data[i]
+                    data[i] = data[i + 1]
+                    data[i + 1] = temp
                     exchanges += 1
             if exchanges == 0:
                 done = True

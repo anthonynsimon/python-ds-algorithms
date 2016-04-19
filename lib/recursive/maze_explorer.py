@@ -19,12 +19,13 @@ class Vector2D(object):
     def __repr__(self):
         return "[{0}, {1}]".format(self.x, self.y)
 
+
 class Maze(object):
 
-    def __init__(self,mazeFileName):
+    def __init__(self, maze_file):
         self.grid = []
-        self.playerPosition = Vector2D(0,0)
-        self.parseMaze(mazeFileName)
+        self.player_position = Vector2D(0, 0)
+        self.parse_maze(maze_file)
 
     def __repr__(self):
         items = []
@@ -32,51 +33,52 @@ class Maze(object):
             items.append("{0}".format(row))
         return "\n".join(items)
 
-    def parseMaze(self, mazeFile):
-        mazePosition = Vector2D(0,0)
+    def parse_maze(self, maze_file):
+        maze_position = Vector2D(0,0)
 
-        for line in open(mazeFile):
+        for line in open(maze_file):
             self.grid.append([])
-            isOpen = False
+            is_open = False
             for element in line:
                 if element == '[':
-                    isOpen = True
+                    is_open = True
                 elif element == ']':
-                    isOpen = False
-                elif isOpen == True:
+                    is_open = False
+                elif is_open == True:
                     if element == PLAYER:
-                        self.playerPosition = Vector2D(mazePosition.x, mazePosition.y)
-                    self.grid[mazePosition.y].append(element)
-                    mazePosition.x += 1
-            mazePosition.x = 0
-            mazePosition.y += 1
+                        self.player_position = Vector2D(maze_position.x, maze_position.y)
+                    self.grid[maze_position.y].append(element)
+                    maze_position.x += 1
+            maze_position.x = 0
+            maze_position.y += 1
 
-    def getGridCell(self,atX,atY):
-        return self.grid[atY][atX]
+    def get_grid_cell(self, x, y):
+        return self.grid[y][x]
 
-    def setGridCell(self, atX, atY, value):
-        self.grid[atY][atX] = value
+    def set_grid_cell(self, x, y, value):
+        self.grid[y][x] = value
 
-    def movePlayer(self, newVector):
-        newCell = self.getGridCell(newVector.x, newVector.y)
-        if newCell == OBSTACLE:
+    def movePlayer(self, new_position):
+        new_cell = self.get_grid_cell(new_position.x, new_position.y)
+        if new_cell == OBSTACLE:
             raise "OBSTACLE"
             return False
-        elif newCell == EXIT:
+        elif new_cell == EXIT:
             return True
 
-        self.setGridCell(self.playerPosition.x,self.playerPosition.y, PART_OF_PATH)
-        self.setGridCell(newVector.x, newVector.y, PLAYER)
-        self.playerPosition = Vector2D(newVector.x, newVector.y)
+        self.set_grid_cell(self.player_position.x, self.player_position.y, PART_OF_PATH)
+        self.set_grid_cell(new_position.x, new_position.y, PLAYER)
+        self.player_position = Vector2D(new_position.x, new_position.y)
         return True
+
 
 class MazeSolver:
 
     def __init__(self, maze):
         self.maze = maze
-        self.pathsGrid = deepcopy(self.maze.grid)
+        self.paths_grid = deepcopy(self.maze.grid)
 
-        if self.solve(self.maze.playerPosition):
+        if self.solve(self.maze.player_position):
             print("Maze solved!")
         else:
             print("Couldn't solve maze...")
@@ -84,18 +86,18 @@ class MazeSolver:
 
     def __repr__(self):
         items = []
-        for row in self.pathsGrid:
+        for row in self.paths_grid:
             items.append("{0}".format(row))
         return "\n".join(items)
 
     def solve(self, vector):
-        cell = self.pathsGrid[vector.y][vector.x]
+        cell = self.paths_grid[vector.y][vector.x]
         if cell == EXIT:
             return True
         elif cell == TRIED or cell == OBSTACLE:
             return False
 
-        self.pathsGrid[vector.y][vector.x] = TRIED
+        self.paths_grid[vector.y][vector.x] = TRIED
         if self.solve(Vector2D(vector.x, vector.y-1)):
             return True
         elif self.solve(Vector2D(vector.x, vector.y+1)):
@@ -106,6 +108,5 @@ class MazeSolver:
             return True
 
 
-maze = Maze("data/maze_map.txt")
-print(maze)
+maze = Maze("./../../data/maze_map.txt")
 solver = MazeSolver(maze)

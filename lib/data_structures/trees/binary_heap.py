@@ -1,32 +1,29 @@
-# TODO:
-# Add MaxHeap
-
 class BinaryHeap(object):
 
     def __init__(self):
-        self.__heapList = [0]
+        self.__heap = [0]
         self.__count = 0
 
     def insert(self, value):
-        self.__heapList.append(value)
+        self.__heap.append(value)
         self.__count += 1
-        self.percolateUp(self.size())
+        self.percolate_up(self.size())
 
     def find_min(self):
         if not self.is_empty():
-            return self.__heapList[1]
+            return self.__heap[1]
 
     def delete_min(self):
         if not self.is_empty():
             if self.size() == 1:
-                result = self.__heapList.pop()
+                result = self.__heap.pop()
                 self.__count -= 1
                 return result
             else:
-                result = self.__heapList[1]
-                self.__heapList[1] = self.__heapList.pop()
+                result = self.__heap[1]
+                self.__heap[1] = self.__heap.pop()
                 self.__count -= 1
-                self.percolateDown(1)
+                self.percolate_down(1)
                 return result
 
     def is_empty(self):
@@ -40,49 +37,49 @@ class BinaryHeap(object):
     # accommodate the values along the way
     # STOP <== (Index -= 1)
     # [0, A, B, C, D, E]
-    def build_heap(self, fromList):
-        if type(fromList) is list:
+    def build_heap(self, data):
+        if type(data) is list:
             self.clear()
-            self.__heapList.extend(fromList)
-            self.__count = len(fromList)
+            self.__heap.extend(data)
+            self.__count = len(data)
             index = self.size() // 2
             while index > 0:
-                self.percolateDown(index)
+                self.percolate_down(index)
                 index -= 1
 
     def clear(self):
-        self.__heapList = [0]
+        self.__heap = [0]
         self.__count = 0
 
-    def percolateUp(self, index):
+    def percolate_up(self, index):
         while index // 2 > 0:
-            if self.__heapList[index] < self.__heapList[index // 2]:
-                self.swapContents(index, index // 2, self.__heapList)
+            if self.__heap[index] < self.__heap[index // 2]:
+                self.swap_contents(index, index // 2, self.__heap)
             index //= 2
 
-    def percolateDown(self, index):
+    def percolate_down(self, index):
         while index * 2 <= self.size(): # while it has at least one child
-            minChild = self.minimumChild(index)
-            if self.__heapList[minChild] < self.__heapList[index]:
-                self.swapContents(minChild, index, self.__heapList)
-            index = minChild
+            min_child = self.get_min_child(index)
+            if self.__heap[min_child] < self.__heap[index]:
+                self.swap_contents(min_child, index, self.__heap)
+            index = min_child
 
-    def minimumChild(self, index):
-        leftChild = index * 2
-        rightChild = index * 2 + 1
-        if rightChild > self.size():
-            return leftChild
+    def get_min_child(self, index):
+        left = index * 2
+        right = index * 2 + 1
+        if right > self.size():
+            return left
         else:
-            if self.__heapList[leftChild] < self.__heapList[rightChild]:
-                return leftChild
+            if self.__heap[left] < self.__heap[right]:
+                return left
             else:
-                return rightChild
+                return right
 
-    def swapContents(self, indexA, indexB, inList):
-        inList[indexA], inList[indexB] = inList[indexB], inList[indexA]
+    def swap_contents(self, index_a, index_b, items):
+        items[index_a], items[index_b] = items[index_b], items[index_a]
 
     def rebuild_heap(self):
-        self.build_heap(self.__heapList[1:])
+        self.build_heap(self.__heap[1:])
 
     def __repr__(self):
-        return str(self.__heapList[1:])
+        return str(self.__heap[1:])

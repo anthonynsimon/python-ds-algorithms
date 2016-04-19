@@ -5,13 +5,13 @@ class SimpleGraph(object):
 
     def __init__(self):
         self.vertices = {}
-        self.vertexCount = 0
+        self.vertex_count = 0
 
     def add_vertex(self, key):
         if key in self:
             return
         self.vertices[key] = SimpleVertex(key)
-        self.vertexCount += 1
+        self.vertex_count += 1
 
     def add_edge(self, vertex_a, vertex_b, undirected=True, weight=0):
         if vertex_a not in self.vertices:
@@ -30,7 +30,7 @@ class SimpleGraph(object):
         return list(self.vertices.values())
 
     def clean_vertices(self):
-        if self.vertexCount > 0:
+        if self.vertex_count > 0:
             for v in self.get_vertices():
                 v.color = "WHITE"
                 v.distance = 0

@@ -1,25 +1,25 @@
 class InsertionSort(object):
 
-    def sort(self, listToSort):
-        if type(listToSort) is not list or len(listToSort) < 1:
+    def sort(self, data):
+        if type(data) is not list or len(data) < 1:
             return
 
-        for i in range(1, len(listToSort)):
-            currentValue = listToSort[i]
+        for i in range(1, len(data)):
+            current = data[i]
             position = i
             for j in range(i):
-                if listToSort[position-1] > currentValue:
-                    listToSort[position] = listToSort[position - 1]
+                if data[position-1] > current:
+                    data[position] = data[position - 1]
                 else:
                     break
                 position -= 1
-            listToSort[position] = currentValue
+            data[position] = current
 
-    def sortAlternateMethod(self, list):
+    def sort_alternative(self, list):
         for i in range(1, len(list)):
-            currentValue = list[i]
+            current = list[i]
             position = i
-            while position > 0 and list[position-1] > currentValue:
+            while position > 0 and list[position-1] > current:
                 list[position] = list[position-1]
                 position -= 1
-            list[position] = currentValue
+            list[position] = current

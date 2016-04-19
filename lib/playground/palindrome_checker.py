@@ -1,18 +1,18 @@
-from lib.data_structures import deque
+from lib.data_structures.deque import Deque
 
 
 def is_palindrome(data):
-    _deque = deque.Deque()
+    deque = Deque()
     inputStr = str(data)
     result = True
     for character in inputStr:
-        _deque.add_head(character)
+        deque.add_head(character)
 
     # iterate over deque until either it proves false or
     # until there's only one character left (pivot point)
-    while _deque.size() > 1 and result == True:
-        result = _deque.remove_head() == _deque.remote_tail()
-        if result == False:
+    while deque.size() > 1 and result == True:
+        result = deque.remove_head() == deque.remote_tail()
+        if not result:
             break
     return result
 

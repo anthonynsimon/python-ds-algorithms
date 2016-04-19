@@ -1,20 +1,20 @@
-from lib.data_structures import Queue
+from lib.data_structures.queue import QueueLL
 
 
-def simulateHotPotato(namesList, numberOfPasses):
-    simQueue = Queue.QueueLL()
-    for name in namesList:
-        simQueue.enqueue(name)
+def simulate_hot_potato(names, number_of_passes):
+    queue = QueueLL()
+    for name in names:
+        queue.enqueue(name)
 
-    for numberOfPeople in range (simQueue.size()):
-        print("{0} {1}".format(simQueue.peek_head(), "has the potato!"))
-        i = numberOfPasses
+    for numberOfPeople in range (queue.size()):
+        print("{0} {1}".format(queue.peek(), "has the potato!"))
+        i = number_of_passes
         while i > 0:
-            simQueue.enqueue(simQueue.dequeue())
-            print("{0} {1}".format("-> pass to", simQueue.peek_head()))
+            queue.enqueue(queue.dequeue())
+            print("{0} {1}".format("-> pass to", queue.peek()))
             i -= 1
-        print("{0} {1}".format(simQueue.dequeue(), "is out!"))
+        print("{0} {1}".format(queue.dequeue(), "is out!"))
 
 
 people = ["Marcus", "Lucia", "John", "Max", "Sarah", "Sam"]
-simulateHotPotato(people, 3)
+simulate_hot_potato(people, 3)
